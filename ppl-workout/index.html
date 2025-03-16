@@ -7,11 +7,15 @@
   <meta name="description" content="Track your progress through the Push-Pull-Legs workout program">
   <meta name="theme-color" content="#C38803">
   <link rel="manifest" href="./manifest.json">
-  <link rel="apple-touch-icon" href="./assets/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="./assets/icons/optimized/icon-192.png">
+  <!-- Preload critical resources -->
+  <link rel="preload" href="./assets/js/workout-storage.min.js" as="script">
+  <link rel="preload" href="./assets/css/modern-ui.min.css" as="style">
+  <link rel="prefetch" href="./assets/js/progress-tracker.min.js">
   <!-- Modern UI Stylesheet -->
-  <link rel="stylesheet" href="./assets/css/modern-ui.css">
+  <link rel="stylesheet" href="./assets/css/modern-ui.min.css">
   <!-- Weight Tracker Stylesheet (for backward compatibility) -->
-  <link rel="stylesheet" href="./assets/css/weight-tracker.css">
+  <link rel="stylesheet" href="./assets/css/weight-tracker.min.css">
 </head>
 <body>
   <header>
@@ -924,10 +928,9 @@
       });
     });
   </script>
-  <script src="./assets/js/workout-storage.js"></script>
-  <script src="./assets/js/exercise-inputs.js"></script>
-  <script src="./assets/js/progress-tracker.js"></script>
-  <script src="./assets/js/network-status.js"></script>
-  <script src="./assets/js/progress-tracker.js"></script>
+  <script src="./assets/js/workout-storage.min.js"></script>
+  <script src="./assets/js/exercise-inputs.min.js"></script>
+  <script src="./assets/js/progress-tracker.min.js"></script>
+  <script src="./assets/js/network-status.min.js"></script>
 </body>
 </html>
