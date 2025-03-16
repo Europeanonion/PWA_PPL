@@ -11,3 +11,4 @@ coverage/
 dist/
 build/
 output/
+__pycache__/
