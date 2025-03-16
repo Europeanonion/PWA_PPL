@@ -257,3 +257,39 @@ const workoutData = {
   }
 };
 ```
+
+## Maintenance
+
+### Deployment Process
+- Always develop new features in the ppl-workout/ directory while on the development branch
+- Keep the main branch as the stable production version
+- When ready to deploy updates:
+  1. Ensure all changes are committed to development branch
+  2. Run the deployment script:
+     ```bash
+     ./ppl-workout/dev/deploy.sh
+     ```
+  3. Verify the deployment worked by testing the live site
+
+### Version Control Workflow
+- Make atomic commits with clear descriptive messages
+- Always test changes locally before pushing to GitHub
+- For major features:
+  1. Create a feature branch from development
+  2. Implement and test the feature
+  3. Merge back to development when complete
+- Only merge development → main when thoroughly tested
+
+### Pre-Deployment Checklist
+- Run HTML/CSS/JS validation
+- Verify all assets are properly minified
+- Test service worker registration and caching
+- Validate PWA functionality works offline
+- Check manifest.json for proper configuration
+- Run Lighthouse audit to ensure optimal performance
+
+### Dependency Management
+- Document all third-party libraries with version numbers
+- Periodically check for security updates
+- Keep external dependencies minimal for better performance
+- Use local copies of critical libraries for offline reliability

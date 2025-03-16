@@ -922,3 +922,68 @@
 - Consider enhancing the script to automatically adjust paths for GitHub Pages
 - Evaluate if additional error handling is needed for specific edge cases
 - Consider adding a rollback feature in case of deployment issues
+
+## 2025-03-16 Dynamic Workout Content Loading Implementation
+
+### Completed Since Last Update
+- Updated all phase and week content divs to be loaded dynamically
+- Implemented dynamic loading of workout content via workout-loader.js
+- Updated service worker to cache workout-loader.min.js
+- Incremented service worker cache version to ensure updates
+- Improved performance by loading workout data on demand
+- Reduced initial HTML size by removing static workout content
+
+### Current Status
+- Working on: Dynamic content loading and PWA optimization
+- Completed:
+  - Dynamic workout content loading
+  - Service worker updates for new files
+  - Performance optimization
+- Pending:
+  - Testing on various devices and network conditions
+  - Lighthouse audit for PWA optimization
+- Progress on milestones:
+  - Core Structure Complete: ✅
+  - Phase 1 Content Complete: ✅
+  - All Phases Content Complete: ✅
+  - Local Storage MVP: ✅
+  - Enhanced Local Features: ✅
+  - Cloud Integration: ⏳ Not started
+
+### Implementation Details
+- Updated all phase and week content divs to be empty placeholders with comments
+- Modified index.html to use dynamic loading for all workout content
+- Updated service worker to cache workout-loader.min.js
+- Incremented service worker cache version from v4 to v5
+- Ensured all workout JSON files are properly cached for offline use
+- Implemented progressive loading of workout data to improve initial load time
+
+### Approach Efficiency Assessment
+- Goals referenced: Performance, mobile compatibility, user experience, maintainability
+- Approaches considered:
+  1. Keep static HTML content for all workouts
+  2. Load only the active phase/week and fetch others on demand
+  3. Implement full dynamic loading for all workout content
+- Selected approach: Full dynamic loading for all workout content
+- Efficiency justification:
+  - Significantly reduces initial HTML size and load time
+  - Improves performance on mobile devices with limited resources
+  - Makes the codebase more maintainable by separating data from presentation
+  - Allows for easier updates to workout content without changing HTML
+  - Provides better user experience with faster initial load
+  - Maintains offline functionality through proper service worker caching
+  - Simplifies the HTML structure for better maintainability
+
+### Next Steps
+- Test dynamic loading on various devices and network conditions
+- Verify offline functionality with the updated service worker
+- Run Lighthouse audit to measure performance improvements
+- Consider implementing loading indicators for slow connections
+- Test the complete user flow through all phases and weeks
+- Update documentation to reflect the new dynamic loading approach
+
+### Issues/Questions
+- Monitor performance on low-end devices to ensure smooth experience
+- Consider implementing progressive loading for workout JSON files
+- Evaluate if additional error handling is needed for failed content loading
+- Research best practices for lazy loading of non-visible content

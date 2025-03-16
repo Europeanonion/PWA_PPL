@@ -7,7 +7,7 @@
   <meta name="description" content="Track your progress through the Push-Pull-Legs workout program">
   <meta name="theme-color" content="#C38803">
   <link rel="manifest" href="./manifest.json">
-  <link rel="apple-touch-icon" href="./assets/icons/optimized/icon-192.png">
+  <link rel="apple-touch-icon" href="./assets/icons/optimized/Icon-192.png">
   <!-- Preload critical resources -->
   <link rel="preload" href="./assets/js/workout-storage.min.js" as="script">
   <link rel="preload" href="./assets/css/modern-ui.min.css" as="style">
@@ -50,317 +50,28 @@
       
       <!-- Week 1 Content -->
       <div id="phase1-week1" class="week-content active">
-        <!-- Push Day 1 -->
-        <article class="workout-day">
-          <header class="day-header">Push #1</header>
-          <div class="progress-indicator">
-            <div>
-              <span>Workout Progress</span>
-              <div class="progress-bar">
-                <div class="progress-bar-fill" style="width: 0%"></div>
-              </div>
-              <div class="progress-stats">
-                <span>0/7 exercises completed</span>
-                <span>0%</span>
-              </div>
-            </div>
-          </div>
-          <table class="exercise-table">
-            <thead>
-              <tr>
-                <th class="table-header" style="width: 35%;">Exercise</th>
-                <th class="table-header" style="width: 15%;">Warm-up</th>
-                <th class="table-header" style="width: 15%;">Working</th>
-                <th class="table-header" style="width: 15%;">Reps</th>
-                <th class="table-header" style="width: 10%;">RPE</th>
-                <th class="table-header" style="width: 10%;">Rest</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="exercise-row">
-                <td class="exercise-name">
-                  <a href="https://youtu.be/vcBig73ojpE?t=134" class="exercise-link" target="_blank" rel="noopener">Bench Press</a>
-                  <span class="info-icon" onclick="toggleNotes('bench-press-notes')">i</span>
-                </td>
-                <td class="exercise-data">3-4</td>
-                <td class="exercise-data">
-                  <div class="set-inputs">
-                    <div class="set-row">
-                      <input type="number" class="weight-input" data-exercise="bench-press" data-set="1" placeholder="lbs">
-                      <input type="checkbox" class="completed-checkbox" data-exercise="bench-press" data-set="1" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
-                    </div>
-                  </div>
-                </td>
-                <td class="exercise-data">3-5</td>
-                <td class="exercise-data">8-9</td>
-                <td class="exercise-data">3-4m</td>
-              </tr>
-              <tr id="bench-press-notes" class="exercise-notes">
-                <td colspan="6">
-                  <strong>Notes:</strong> Set up a comfortable arch, quick pause on the chest and explode up on each rep.
-                  <br><br>
-                  <button class="sub-btn" onclick="toggleSubs('bench-press-subs')">Show Substitutions</button>
-                  <div id="bench-press-subs" class="substitutions">
-                    <strong>Substitution Options:</strong>
-                    <br>1. DB Bench Press
-                    <br>2. Machine Chest Press
-                  </div>
-                </td>
-              </tr>
-              
-              <tr class="exercise-row">
-                <td class="exercise-name">
-                  <a href="https://youtu.be/RQjPWrMMDqQ" class="exercise-link" target="_blank" rel="noopener">Larsen Press</a>
-                  <span class="info-icon" onclick="toggleNotes('larsen-press-notes')">i</span>
-                </td>
-                <td class="exercise-data">0</td>
-                <td class="exercise-data">
-                  <div class="set-inputs">
-                    <div class="set-row">
-                      <input type="number" class="weight-input" data-exercise="larsen-press" data-set="1" placeholder="lbs">
-                      <input type="checkbox" class="completed-checkbox" data-exercise="larsen-press" data-set="1" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
-                    </div>
-                    <div class="set-row">
-                      <input type="number" class="weight-input" data-exercise="larsen-press" data-set="2" placeholder="lbs">
-                      <input type="checkbox" class="completed-checkbox" data-exercise="larsen-press" data-set="2" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
-                    </div>
-                  </div>
-                </td>
-                <td class="exercise-data">10</td>
-                <td class="exercise-data">8-9</td>
-                <td class="exercise-data">3-4m</td>
-              </tr>
-              <tr id="larsen-press-notes" class="exercise-notes">
-                <td colspan="6">
-                  <strong>Notes:</strong> Shoulder blades still retracted and depressed. Slight arch in upper back. Zero leg drive.
-                  <br><br>
-                  <button class="sub-btn" onclick="toggleSubs('larsen-press-subs')">Show Substitutions</button>
-                  <div id="larsen-press-subs" class="substitutions">
-                    <strong>Substitution Options:</strong>
-                    <br>1. DB Bench Press (No Leg Drive)
-                    <br>2. Machine Chest Press (No Leg Drive)
-                  </div>
-                </td>
-              </tr>
-              
-              <tr class="exercise-row">
-                <td class="exercise-name">
-                  <a href="https://www.youtube.com/watch?v=zOpA1Op0zvc" class="exercise-link" target="_blank" rel="noopener">Standing Dumbbell Arnold Press</a>
-                  <span class="info-icon" onclick="toggleNotes('arnold-press-notes')">i</span>
-                </td>
-                <td class="exercise-data">2</td>
-                <td class="exercise-data">
-                  <div class="set-inputs">
-                    <div class="set-row">
-                      <input type="number" class="weight-input" data-exercise="arnold-press" data-set="1" placeholder="lbs">
-                      <input type="checkbox" class="completed-checkbox" data-exercise="arnold-press" data-set="1" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
-                    </div>
-                    <div class="set-row">
-                      <input type="number" class="weight-input" data-exercise="arnold-press" data-set="2" placeholder="lbs">
-                      <input type="checkbox" class="completed-checkbox" data-exercise="arnold-press" data-set="2" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
-                    </div>
-                    <div class="set-row">
-                      <input type="number" class="weight-input" data-exercise="arnold-press" data-set="3" placeholder="lbs">
-                      <input type="checkbox" class="completed-checkbox" data-exercise="arnold-press" data-set="3" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
-                    </div>
-                  </div>
-                </td>
-                <td class="exercise-data">8-10</td>
-                <td class="exercise-data">8-9</td>
-                <td class="exercise-data">2-3m</td>
-              </tr>
-              <tr id="arnold-press-notes" class="exercise-notes">
-                <td colspan="6">
-                  <strong>Notes:</strong> Start with your elbows in front of you and palms facing in. Rotate the dumbbells so that your palms face forward as you press.
-                  <br><br>
-                  <button class="sub-btn" onclick="toggleSubs('arnold-press-subs')">Show Substitutions</button>
-                  <div id="arnold-press-subs" class="substitutions">
-                    <strong>Substitution Options:</strong>
-                    <br>1. Seated DB Shoulder Press
-                    <br>2. Machine Shoulder Press
-                  </div>
-                </td>
-              </tr>
-              
-              <tr class="exercise-row">
-                <td class="exercise-name">
-                  <a href="https://youtu.be/NsEbXsTwas8?t=483" class="exercise-link" target="_blank" rel="noopener">A1. Press-Around</a>
-                  <span class="info-icon" onclick="toggleNotes('press-around-notes')">i</span>
-                </td>
-                <td class="exercise-data">1</td>
-                <td class="exercise-data">
-                  <div class="set-inputs">
-                    <div class="set-row">
-                      <input type="number" class="weight-input" data-exercise="press-around" data-set="1" placeholder="lbs">
-                      <input type="checkbox" class="completed-checkbox" data-exercise="press-around" data-set="1" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
-                    </div>
-                    <div class="set-row">
-                      <input type="number" class="weight-input" data-exercise="press-around" data-set="2" placeholder="lbs">
-                      <input type="checkbox" class="completed-checkbox" data-exercise="press-around" data-set="2" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
-                    </div>
-                  </div>
-                </td>
-                <td class="exercise-data">12-15</td>
-                <td class="exercise-data">9</td>
-                <td class="exercise-data">0m</td>
-              </tr>
-              <tr id="press-around-notes" class="exercise-notes">
-                <td colspan="6">
-                  <strong>Notes:</strong> Brace with your non-working arm, squeeze your pecs by pressing the cable across your body.
-                  <br><br>
-                  <button class="sub-btn" onclick="toggleSubs('press-around-subs')">Show Substitutions</button>
-                  <div id="press-around-subs" class="substitutions">
-                    <strong>Substitution Options:</strong>
-                    <br>1. DB Flye
-                    <br>2. Deficit Push Up
-                  </div>
-                </td>
-              </tr>
-              
-              <tr class="exercise-row">
-                <td class="exercise-name">
-                  <a href="https://youtu.be/B5ZoqtHClCA" class="exercise-link" target="_blank" rel="noopener">A2. Pec Static Stretch 30s</a>
-                  <span class="info-icon" onclick="toggleNotes('pec-stretch-notes')">i</span>
-                </td>
-                <td class="exercise-data">0</td>
-                <td class="exercise-data">
-                  <div class="set-inputs">
-                    <div class="set-row">
-                      <input type="checkbox" class="completed-checkbox" data-exercise="pec-stretch" data-set="1" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
-                    </div>
-                    <div class="set-row">
-                      <input type="checkbox" class="completed-checkbox" data-exercise="pec-stretch" data-set="2" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
-                    </div>
-                  </div>
-                </td>
-                <td class="exercise-data">30s HOLD</td>
-                <td class="exercise-data">N/A</td>
-                <td class="exercise-data">0m</td>
-              </tr>
-              <tr id="pec-stretch-notes" class="exercise-notes">
-                <td colspan="6">
-                  <strong>Notes:</strong> Hold a pec stretch for 30 seconds. The stretch should be held at about a 7/10 intensity.
-                </td>
-              </tr>
-              
-              <tr class="exercise-row">
-                <td class="exercise-name">
-                  <a href="https://youtu.be/Jt2hV6dCbmE" class="exercise-link" target="_blank" rel="noopener">Cross-Body Cable Y-Raise (Side Delt)</a>
-                  <span class="info-icon" onclick="toggleNotes('y-raise-notes')">i</span>
-                </td>
-                <td class="exercise-data">1</td>
-                <td class="exercise-data">
-                  <div class="set-inputs">
-                    <div class="set-row">
-                      <input type="number" class="weight-input" data-exercise="y-raise" data-set="1" placeholder="lbs">
-                      <input type="checkbox" class="completed-checkbox" data-exercise="y-raise" data-set="1" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
-                    </div>
-                    <div class="set-row">
-                      <input type="number" class="weight-input" data-exercise="y-raise" data-set="2" placeholder="lbs">
-                      <input type="checkbox" class="completed-checkbox" data-exercise="y-raise" data-set="2" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
-                    </div>
-                    <div class="set-row">
-                      <input type="number" class="weight-input" data-exercise="y-raise" data-set="3" placeholder="lbs">
-                      <input type="checkbox" class="completed-checkbox" data-exercise="y-raise" data-set="3" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
-                    </div>
-                  </div>
-                </td>
-                <td class="exercise-data">12-15</td>
-                <td class="exercise-data">9</td>
-                <td class="exercise-data">1-2m</td>
-              </tr>
-              <tr id="y-raise-notes" class="exercise-notes">
-                <td colspan="6">
-                  <strong>Notes:</strong> Think about swinging the cable out and up as if "drawing a sword" from your side.
-                  <br><br>
-                  <button class="sub-btn" onclick="toggleSubs('y-raise-subs')">Show Substitutions</button>
-                  <div id="y-raise-subs" class="substitutions">
-                    <strong>Substitution Options:</strong>
-                    <br>1. DB Lateral Raise
-                    <br>2. Machine Lateral Raise
-                  </div>
-                </td>
-              </tr>
-              
-              <tr class="exercise-row">
-                <td class="exercise-name">
-                  <a href="https://youtu.be/M9k0RcOQKOo" class="exercise-link" target="_blank" rel="noopener">Squeeze-Only Triceps Pressdown + Stretch-Only Overhead Extension</a>
-                  <span class="info-icon" onclick="toggleNotes('tri-combo-notes')">i</span>
-                </td>
-                <td class="exercise-data">1</td>
-                <td class="exercise-data">
-                  <div class="set-inputs">
-                    <div class="set-row">
-                      <input type="number" class="weight-input" data-exercise="tri-combo" data-set="1" placeholder="lbs">
-                      <input type="checkbox" class="completed-checkbox" data-exercise="tri-combo" data-set="1" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
-                    </div>
-                    <div class="set-row">
-                      <input type="number" class="weight-input" data-exercise="tri-combo" data-set="2" placeholder="lbs">
-                      <input type="checkbox" class="completed-checkbox" data-exercise="tri-combo" data-set="2" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
-                    </div>
-                    <div class="set-row">
-                      <input type="number" class="weight-input" data-exercise="tri-combo" data-set="3" placeholder="lbs">
-                      <input type="checkbox" class="completed-checkbox" data-exercise="tri-combo" data-set="3" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
-                    </div>
-                  </div>
-                </td>
-                <td class="exercise-data">8 + 8</td>
-                <td class="exercise-data">9</td>
-                <td class="exercise-data">1-2m</td>
-              </tr>
-              <tr id="tri-combo-notes" class="exercise-notes">
-                <td colspan="6">
-                  <strong>Notes:</strong> Do the second half of the ROM for pressdowns ("the squeeze") and the first half of the ROM for overhead extensions ("the stretch").
-                  <br><br>
-                  <button class="sub-btn" onclick="toggleSubs('tri-combo-subs')">Show Substitutions</button>
-                  <div id="tri-combo-subs" class="substitutions">
-                    <strong>Substitution Options:</strong>
-                    <br>1. Triceps Pressdown (12-15 reps)
-                    <br>2. DB Skull Crusher (12-15 reps)
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </article>
-        
-        <!-- Additional workout days would go here -->
+        <!-- Workout days will be loaded dynamically by workout-loader.js -->
       </div>
       
-      <!-- Week 2-6 Content would go here with similar structure -->
+      <!-- Week 2-6 Content -->
       <div id="phase1-week2" class="week-content">
-        <article class="workout-day">
-          <header class="day-header">Week 2</header>
-          <p style="padding: 20px; text-align: center;">Week 2 content would follow the same structure as Week 1, with progressive overload applied.<br><br>In the full implementation, all six weeks would be included with their specific progression patterns.</p>
-        </article>
+        <!-- Workout days will be loaded dynamically by workout-loader.js -->
       </div>
       
       <div id="phase1-week3" class="week-content">
-        <article class="workout-day">
-          <header class="day-header">Week 3</header>
-          <p style="padding: 20px; text-align: center;">Week 3 content would follow the same structure as previous weeks, with progressive overload applied.</p>
-        </article>
+        <!-- Workout days will be loaded dynamically by workout-loader.js -->
       </div>
       
       <div id="phase1-week4" class="week-content">
-        <article class="workout-day">
-          <header class="day-header">Week 4</header>
-          <p style="padding: 20px; text-align: center;">Week 4 content would follow the same structure as previous weeks, with progressive overload applied.</p>
-        </article>
+        <!-- Workout days will be loaded dynamically by workout-loader.js -->
       </div>
       
       <div id="phase1-week5" class="week-content">
-        <article class="workout-day">
-          <header class="day-header">Week 5</header>
-          <p style="padding: 20px; text-align: center;">Week 5 content would follow the same structure as previous weeks, with progressive overload applied.</p>
-        </article>
+        <!-- Workout days will be loaded dynamically by workout-loader.js -->
       </div>
       
       <div id="phase1-week6" class="week-content">
-        <article class="workout-day">
-          <header class="day-header">Week 6</header>
-          <p style="padding: 20px; text-align: center;">Week 6 content would follow the same structure as previous weeks, with progressive overload applied.</p>
-        </article>
+        <!-- Workout days will be loaded dynamically by workout-loader.js -->
       </div>
     </section>
     
@@ -379,115 +90,29 @@
       
       <!-- Phase 2 Week 1 Content -->
       <div id="phase2-week1" class="week-content active">
-        <article class="workout-day">
-          <header class="day-header">Push #1</header>
-          <div class="progress-indicator">
-            <div>
-              <span>Workout Progress</span>
-              <div class="progress-bar">
-                <div class="progress-bar-fill" style="width: 0%"></div>
-              </div>
-              <div class="progress-stats">
-                <span>0/7 exercises completed</span>
-                <span>0%</span>
-              </div>
-            </div>
-          </div>
-          <table class="exercise-table">
-            <thead>
-              <tr>
-                <th class="table-header" style="width: 35%;">Exercise</th>
-                <th class="table-header" style="width: 15%;">Warm-up</th>
-                <th class="table-header" style="width: 15%;">Working</th>
-                <th class="table-header" style="width: 15%;">Reps</th>
-                <th class="table-header" style="width: 10%;">RPE</th>
-                <th class="table-header" style="width: 10%;">Rest</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="exercise-row">
-                <td class="exercise-name">
-                  <a href="https://youtu.be/vcBig73ojpE?t=134" class="exercise-link" target="_blank" rel="noopener">Bench Press</a>
-                  <span class="info-icon" onclick="toggleNotes('ph2-bench-press-notes')">i</span>
-                </td>
-                <td class="exercise-data">3-4</td>
-                <td class="exercise-data">
-                  <div class="set-inputs">
-                    <div class="set-row">
-                      <input type="number" class="weight-input" data-exercise="bench-press" data-set="1" placeholder="lbs">
-                      <input type="checkbox" class="completed-checkbox" data-exercise="bench-press" data-set="1" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
-                    </div>
-                  </div>
-                </td>
-                <td class="exercise-data">3-5</td>
-                <td class="exercise-data">8-9</td>
-                <td class="exercise-data">3-5m</td>
-              </tr>
-              <tr id="ph2-bench-press-notes" class="exercise-notes">
-                <td colspan="6">
-                  <strong>Notes:</strong> Set up a comfortable arch, quick pause on the chest and explode up on each rep.
-                  <br><br>
-                  <button class="sub-btn" onclick="toggleSubs('ph2-bench-press-subs')">Show Substitutions</button>
-                  <div id="ph2-bench-press-subs" class="substitutions">
-                    <strong>Substitution Options:</strong>
-                    <br>1. DB Bench Press
-                    <br>2. Machine Chest Press
-                  </div>
-                </td>
-              </tr>
-              
-              <tr class="exercise-row">
-                <td class="exercise-name">
-                  <a href="#" class="exercise-link" target="_blank" rel="noopener">High-Incline Smith Machine Press</a>
-                  <span class="info-icon" onclick="toggleNotes('ph2-incline-notes')">i</span>
-                </td>
-                <td class="exercise-data">2</td>
-                <td class="exercise-data">
-                  <div class="set-inputs">
-                    <div class="set-row">
-                      <input type="number" class="weight-input" data-exercise="incline-smith" data-set="1" placeholder="lbs">
-                      <input type="checkbox" class="completed-checkbox" data-exercise="incline-smith" data-set="1" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
-                    </div>
-                    <div class="set-row">
-                      <input type="number" class="weight-input" data-exercise="incline-smith" data-set="2" placeholder="lbs">
-                      <input type="checkbox" class="completed-checkbox" data-exercise="incline-smith" data-set="2" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
-                    </div>
-                  </div>
-                </td>
-                <td class="exercise-data">4-6</td>
-                <td class="exercise-data">10</td>
-                <td class="exercise-data">3-4m</td>
-              </tr>
-              <tr id="ph2-incline-notes" class="exercise-notes">
-                <td colspan="6">
-                  <strong>Notes:</strong> Set the bench at a 45-60° incline, touch the bar to your upper chest with control.
-                  <br><br>
-                  <button class="sub-btn" onclick="toggleSubs('ph2-incline-subs')">Show Substitutions</button>
-                  <div id="ph2-incline-subs" class="substitutions">
-                    <strong>Substitution Options:</strong>
-                    <br>1. Incline DB Press
-                    <br>2. Incline Machine Press
-                  </div>
-                </td>
-              </tr>
-              
-              <!-- More exercises would go here -->
-            </tbody>
-          </table>
-        </article>
-        
-        <!-- More workout days would go here -->
+        <!-- Workout days will be loaded dynamically by workout-loader.js -->
       </div>
       
-      <!-- Week 2-6 placeholders -->
+      <!-- Week 2-6 Content -->
       <div id="phase2-week2" class="week-content">
-        <article class="workout-day">
-          <header class="day-header">Week 2</header>
-          <p style="padding: 20px; text-align: center;">Week 2 content would be fully implemented in the complete version.</p>
-        </article>
+        <!-- Workout days will be loaded dynamically by workout-loader.js -->
       </div>
       
-      <!-- Weeks 3-6 similar to above -->
+      <div id="phase2-week3" class="week-content">
+        <!-- Workout days will be loaded dynamically by workout-loader.js -->
+      </div>
+      
+      <div id="phase2-week4" class="week-content">
+        <!-- Workout days will be loaded dynamically by workout-loader.js -->
+      </div>
+      
+      <div id="phase2-week5" class="week-content">
+        <!-- Workout days will be loaded dynamically by workout-loader.js -->
+      </div>
+      
+      <div id="phase2-week6" class="week-content">
+        <!-- Workout days will be loaded dynamically by workout-loader.js -->
+      </div>
     </section>
     
     <!-- PHASE 3 -->
@@ -505,127 +130,29 @@
       
       <!-- Phase 3 Week 1 Content -->
       <div id="phase3-week1" class="week-content active">
-        <article class="workout-day">
-          <header class="day-header">Push #1</header>
-          <div class="progress-indicator">
-            <div>
-              <span>Workout Progress</span>
-              <div class="progress-bar">
-                <div class="progress-bar-fill" style="width: 0%"></div>
-              </div>
-              <div class="progress-stats">
-                <span>0/7 exercises completed</span>
-                <span>0%</span>
-              </div>
-            </div>
-          </div>
-          <table class="exercise-table">
-            <thead>
-              <tr>
-                <th class="table-header" style="width: 35%;">Exercise</th>
-                <th class="table-header" style="width: 15%;">Warm-up</th>
-                <th class="table-header" style="width: 15%;">Working</th>
-                <th class="table-header" style="width: 15%;">Reps</th>
-                <th class="table-header" style="width: 10%;">RPE</th>
-                <th class="table-header" style="width: 10%;">Rest</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="exercise-row">
-                <td class="exercise-name">
-                  <a href="#" class="exercise-link" target="_blank" rel="noopener">Low Incline DB Press</a>
-                  <span class="info-icon" onclick="toggleNotes('ph3-incline-db-notes')">i</span>
-                </td>
-                <td class="exercise-data">2</td>
-                <td class="exercise-data">
-                  <div class="set-inputs">
-                    <div class="set-row">
-                      <input type="number" class="weight-input" data-exercise="incline-db" data-set="1" placeholder="lbs">
-                      <input type="checkbox" class="completed-checkbox" data-exercise="incline-db" data-set="1" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
-                    </div>
-                    <div class="set-row">
-                      <input type="number" class="weight-input" data-exercise="incline-db" data-set="2" placeholder="lbs">
-                      <input type="checkbox" class="completed-checkbox" data-exercise="incline-db" data-set="2" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
-                    </div>
-                    <div class="set-row">
-                      <input type="number" class="weight-input" data-exercise="incline-db" data-set="3" placeholder="lbs">
-                      <input type="checkbox" class="completed-checkbox" data-exercise="incline-db" data-set="3" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
-                    </div>
-                  </div>
-                </td>
-                <td class="exercise-data">20</td>
-                <td class="exercise-data">9</td>
-                <td class="exercise-data">2-3m</td>
-              </tr>
-              <tr id="ph3-incline-db-notes" class="exercise-notes">
-                <td colspan="6">
-                  <strong>Notes:</strong> 15° bench angle, tuck your elbows on the negative, flare as you press.
-                  <br><br>
-                  <button class="sub-btn" onclick="toggleSubs('ph3-incline-db-subs')">Show Substitutions</button>
-                  <div id="ph3-incline-db-subs" class="substitutions">
-                    <strong>Substitution Options:</strong>
-                    <br>1. Low Incline Machine Press
-                    <br>2. Low Incline Smith Machine Press
-                  </div>
-                </td>
-              </tr>
-              
-              <tr class="exercise-row">
-                <td class="exercise-name">
-                  <a href="#" class="exercise-link" target="_blank" rel="noopener">Machine Shoulder Press</a>
-                  <span class="info-icon" onclick="toggleNotes('ph3-shoulder-press-notes')">i</span>
-                </td>
-                <td class="exercise-data">2</td>
-                <td class="exercise-data">
-                  <div class="set-inputs">
-                    <div class="set-row">
-                      <input type="number" class="weight-input" data-exercise="machine-shoulder" data-set="1" placeholder="lbs">
-                      <input type="checkbox" class="completed-checkbox" data-exercise="machine-shoulder" data-set="1" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
-                    </div>
-                    <div class="set-row">
-                      <input type="number" class="weight-input" data-exercise="machine-shoulder" data-set="2" placeholder="lbs">
-                      <input type="checkbox" class="completed-checkbox" data-exercise="machine-shoulder" data-set="2" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
-                    </div>
-                    <div class="set-row">
-                      <input type="number" class="weight-input" data-exercise="machine-shoulder" data-set="3" placeholder="lbs">
-                      <input type="checkbox" class="completed-checkbox" data-exercise="machine-shoulder" data-set="3" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
-                    </div>
-                  </div>
-                </td>
-                <td class="exercise-data">15</td>
-                <td class="exercise-data">9</td>
-                <td class="exercise-data">2-3m</td>
-              </tr>
-              <tr id="ph3-shoulder-press-notes" class="exercise-notes">
-                <td colspan="6">
-                  <strong>Notes:</strong> Don't stop in between reps, keep smooth and controlled tension on the delts.
-                  <br><br>
-                  <button class="sub-btn" onclick="toggleSubs('ph3-shoulder-press-subs')">Show Substitutions</button>
-                  <div id="ph3-shoulder-press-subs" class="substitutions">
-                    <strong>Substitution Options:</strong>
-                    <br>1. DB Shoulder Press
-                    <br>2. Standing DB Arnold Press
-                  </div>
-                </td>
-              </tr>
-              
-              <!-- More exercises would go here -->
-            </tbody>
-          </table>
-        </article>
-        
-        <!-- More workout days would go here -->
+        <!-- Workout days will be loaded dynamically by workout-loader.js -->
       </div>
       
-      <!-- Week 2-6 placeholders -->
+      <!-- Week 2-6 Content -->
       <div id="phase3-week2" class="week-content">
-        <article class="workout-day">
-          <header class="day-header">Week 2</header>
-          <p style="padding: 20px; text-align: center;">Week 2 content would be fully implemented in the complete version.</p>
-        </article>
+        <!-- Workout days will be loaded dynamically by workout-loader.js -->
       </div>
       
-      <!-- Weeks 3-6 similar to above -->
+      <div id="phase3-week3" class="week-content">
+        <!-- Workout days will be loaded dynamically by workout-loader.js -->
+      </div>
+      
+      <div id="phase3-week4" class="week-content">
+        <!-- Workout days will be loaded dynamically by workout-loader.js -->
+      </div>
+      
+      <div id="phase3-week5" class="week-content">
+        <!-- Workout days will be loaded dynamically by workout-loader.js -->
+      </div>
+      
+      <div id="phase3-week6" class="week-content">
+        <!-- Workout days will be loaded dynamically by workout-loader.js -->
+      </div>
     </section>
   </main>
   
@@ -932,5 +459,6 @@
   <script src="./assets/js/exercise-inputs.min.js"></script>
   <script src="./assets/js/progress-tracker.min.js"></script>
   <script src="./assets/js/network-status.min.js"></script>
+  <script src="./assets/js/workout-loader.min.js"></script>
 </body>
 </html>
