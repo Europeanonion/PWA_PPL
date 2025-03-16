@@ -89,6 +89,10 @@ git push origin gh-pages
 echo -e "${YELLOW}Returning to ${CURRENT_BRANCH} branch...${RESET}"
 git checkout ${CURRENT_BRANCH}
 
+# Push development branch changes to remote repository
+echo -e "${YELLOW}Pushing ${CURRENT_BRANCH} branch changes to remote repository...${RESET}"
+git push origin ${CURRENT_BRANCH}
+
 echo -e "${BOLD}${GREEN}Deployment complete!${RESET}"
 echo -e "Your PWA should be available at: ${BOLD}https://YOUR-USERNAME.github.io/${REPO_NAME}/${RESET}"
 echo -e "Note: It may take a few minutes for GitHub Pages to build and deploy your site."
