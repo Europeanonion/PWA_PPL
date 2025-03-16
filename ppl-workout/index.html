@@ -6,12 +6,12 @@
   <title>The Ultimate Push Pull Legs System</title>
   <meta name="description" content="Track your progress through the Push-Pull-Legs workout program">
   <meta name="theme-color" content="#C38803">
-  <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="./assets/icons/icon-192.png">
   <!-- Modern UI Stylesheet -->
-  <link rel="stylesheet" href="assets/css/modern-ui.css">
+  <link rel="stylesheet" href="./assets/css/modern-ui.css">
   <!-- Weight Tracker Stylesheet (for backward compatibility) -->
-  <link rel="stylesheet" href="assets/css/weight-tracker.css">
+  <link rel="stylesheet" href="./assets/css/weight-tracker.css">
 </head>
 <body>
   <header>
@@ -796,7 +796,7 @@
     // Register service worker for PWA functionality
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js')
+        navigator.serviceWorker.register('./service-worker.js')
           .then(registration => {
             console.log('ServiceWorker registration successful with scope: ', registration.scope);
             
@@ -924,10 +924,10 @@
       });
     });
   </script>
-  <script src="assets/js/workout-storage.js"></script>
-  <script src="assets/js/exercise-inputs.js"></script>
-  <script src="assets/js/progress-tracker.js"></script>
-  <script src="assets/js/network-status.js"></script>
-  <script src="assets/js/progress-tracker.js"></script>
+  <script src="./assets/js/workout-storage.js"></script>
+  <script src="./assets/js/exercise-inputs.js"></script>
+  <script src="./assets/js/progress-tracker.js"></script>
+  <script src="./assets/js/network-status.js"></script>
+  <script src="./assets/js/progress-tracker.js"></script>
 </body>
 </html>
