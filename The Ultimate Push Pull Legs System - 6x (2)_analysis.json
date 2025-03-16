@@ -1,0 +1,16 @@
+{
+  "program_structure": {
+    "phases": [
+      1,
+      2,
+      3
+    ],
+    "weeks_per_phase": 6,
+    "days_per_week": 0,
+    "progression_pattern": null
+  },
+  "workout_data": {},
+  "exercise_library": {},
+  "progression_patterns": {},
+  "set_rep_schemes": {}
+}

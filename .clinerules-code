@@ -1,0 +1,201 @@
+# Development Rules and Guidelines for PPL Workout App
+
+## Project Overview
+- Project Name: Ultimate Push-Pull-Legs Workout Tracker
+- Main File: ppl-workout-html.html
+- Goal: Create a comprehensive workout tracking system with progression through phases and weeks
+
+## Code Style Guidelines
+
+### HTML
+- Use HTML5 semantic elements when appropriate
+- Maintain consistent indentation (2 spaces)
+- Add descriptive comments for major sections
+- IDs should use kebab-case (e.g., `exercise-row`)
+- Classes should be descriptive of their purpose
+- All links should include `target="_blank"` and `rel="noopener"`
+
+### CSS
+- Keep styles in the `<style>` section of the HTML file
+- Use classes instead of IDs for styling when possible
+- Follow mobile-first approach for responsive design
+- Use CSS variables for color themes and repeated values
+- Maintain consistent naming conventions for classes
+
+### JavaScript
+- Use ES6+ syntax when possible
+- Keep functions small and focused on a single task
+- Use descriptive variable and function names
+- Add comments for complex logic
+- Validate user inputs where necessary
+- Use consistent error handling
+
+## Development Process
+
+### 1. Core App Development (Current Focus)
+- Complete one phase/week at a time before moving to the next
+- Test each component before proceeding
+- Keep mobile compatibility in mind throughout development
+
+### 2. Local Storage Implementation
+- Use a clear, hierarchical data structure
+- Implement auto-save functionality where possible
+- Provide feedback to users when data is saved/loaded
+- Include data export/import functionality
+
+### 3. Advanced Features (Optional)
+- Only begin after core app is fully functional
+- Document all Firebase configuration requirements
+- Keep authentication simple and secure
+- Implement proper error handling for network operations
+
+## Memory Bank Requirements
+
+### Format
+The memory bank should be maintained as a Markdown file named `dev-memory-bank.md` and should include:
+
+1. **Current Development Status**
+   - Which phase/week is currently being worked on
+   - List of completed components
+   - List of pending components
+   - Current blockers or issues
+
+2. **Implementation Decisions**
+   - Record of key decisions made during development
+   - Reasons for specific technical approaches
+   - Alternative approaches considered
+
+3. **Data Structures**
+   - Document the structure of all data objects
+   - Include examples of expected data formats
+   - Define relationships between different data elements
+
+4. **Browser Compatibility Notes**
+   - Record any browser-specific issues encountered
+   - Document solutions implemented for cross-browser compatibility
+
+5. **Testing Notes**
+   - List of test cases executed
+   - Issues found during testing
+   - Verification steps for key functionality
+
+### Memory Bank Update Process
+1. Update the memory bank at the end of each development session
+2. Include timestamp with each major update
+3. Review the memory bank at the start of each new session
+4. Use the memory bank to track progress and maintain continuity
+
+## Memory Bank Commands
+
+### UMB Command
+When the user types "UMB" (Update Memory Bank), the agent should:
+
+1. Analyze the current state of the project files
+2. Create a new entry in the memory bank with the current date
+3. Document what has been completed since the last update
+4. Update the "Current Focus" and "Completed Components" sections
+5. Add any new implementation decisions or data structures
+6. Suggest next steps based on current progress
+7. Record any new issues or blockers encountered
+
+The agent should respond with a brief confirmation of the update and a summary of key points added to the memory bank.
+
+Example response:
+```
+Memory bank updated with:
+- Documented completion of Push Day 1 exercise data
+- Added technical notes about localStorage implementation
+- Updated next steps to focus on Pull Day 1
+- Added browser compatibility note regarding Safari input fields
+```
+
+### Memory Bank Update Template
+When updating the memory bank, the agent should use this template:
+
+```
+## YYYY-MM-DD Development Update
+
+### Completed Since Last Update
+- [List of completed tasks/components]
+
+### Current Status
+- Working on: [Current focus]
+- Completed: [List of completed components]
+- Pending: [List of pending components]
+- Progress on milestones: [Update on milestone progress]
+
+### Implementation Details
+- [Any new technical decisions or implementation details]
+- [Changes to data structures or architecture]
+- [Solutions to previous issues or blockers]
+
+### Next Steps
+- [List of next tasks to complete]
+
+### Issues/Questions
+- [Any new blockers or technical questions]
+```
+
+## Example Memory Bank Entry
+
+```
+## 2025-03-16 Development Session
+
+### Completed Today
+- Fixed table structure in Push Day 1
+- Implemented toggleNotes() function
+- Added exercise links for all week 1 bench press variations
+
+### Current Status
+- Working on: Phase 1, Week 1, Pull Day exercises
+- Completed: Push Day 1, Push Day 2
+- Pending: Pull Day 2, Legs Day 1, Legs Day 2
+
+### Decisions Made
+- Decided to use input fields of type "number" for weight tracking instead of text fields
+- Using localStorage instead of sessionStorage to ensure data persists between browser sessions
+- Implemented collapsible notes to save screen space
+
+### Next Steps
+- Complete remaining exercises for Pull Day 1
+- Add substitution options for leg exercises
+- Implement basic localStorage saving for completed sets
+
+### Issues/Questions
+- Need to research best approach for tracking progress over time
+- Consider adding RPE explanation tooltip for new users
+```
+
+## Project Milestones Tracking
+
+Track these milestones in the memory bank:
+
+1. **Core Structure Complete** - Basic HTML/CSS framework with all navigation
+2. **Phase 1 Content Complete** - All exercises, notes, and links for Phase 1
+3. **All Phases Content Complete** - Full workout program implemented
+4. **Local Storage MVP** - Basic tracking of weights and completed sets
+5. **Enhanced Local Features** - Progress visualization and notes
+6. **Cloud Integration** - If implementing Firebase (optional)
+
+## Implementation Notes
+
+### LocalStorage Data Structure
+```javascript
+// Example structure - document in memory bank
+const workoutData = {
+  "phase1": {
+    "week1": {
+      "push1": {
+        "exercises": {
+          "benchPress": {
+            "weights": ["135", "155", "175"],
+            "completed": [true, true, false],
+            "notes": "Felt strong on first two sets"
+          }
+        },
+        "completed": "2023-03-16"
+      }
+    }
+  }
+};
+```
