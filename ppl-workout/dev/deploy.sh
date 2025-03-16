@@ -24,11 +24,14 @@ echo "This script will deploy your PWA to GitHub Pages."
 CURRENT_BRANCH=$(git branch --show-current)
 echo -e "${YELLOW}Current branch: ${CURRENT_BRANCH}${RESET}"
 
-# Check if there are uncommitted changes
-if [[ -n $(git status -s) ]]; then
+# Check if there are uncommitted changes - fixed with quotes and --porcelain
+if [[ -n "$(git status --porcelain)" ]]; then
   echo -e "${RED}You have uncommitted changes. Please commit or stash them before deploying.${RESET}"
   exit 1
 fi
+
+# Move to repository root to ensure proper paths
+cd "$(git rev-parse --show-toplevel)"
 
 # Check if gh-pages branch exists
 if ! git show-ref --verify --quiet refs/heads/gh-pages; then
@@ -36,19 +39,24 @@ if ! git show-ref --verify --quiet refs/heads/gh-pages; then
   git checkout -b gh-pages
   echo -e "${GREEN}Created gh-pages branch.${RESET}"
 else
-  # Update development branch
+  # Update current branch
   echo -e "${YELLOW}Updating ${CURRENT_BRANCH} branch...${RESET}"
   git checkout ${CURRENT_BRANCH}
-  git pull origin ${CURRENT_BRANCH}
+  git pull origin ${CURRENT_BRANCH} || { echo -e "${RED}Failed to pull latest changes.${RESET}"; exit 1; }
   
   # Switch to gh-pages branch
   echo -e "${YELLOW}Switching to gh-pages branch...${RESET}"
-  git checkout gh-pages
-  git pull origin gh-pages
+  git checkout gh-pages || { echo -e "${RED}Failed to switch to gh-pages branch.${RESET}"; exit 1; }
+  git pull origin gh-pages || echo -e "${YELLOW}Warning: Could not pull from gh-pages. This might be first deployment.${RESET}"
   
   # Merge changes from development branch
   echo -e "${YELLOW}Merging changes from ${CURRENT_BRANCH}...${RESET}"
-  git merge ${CURRENT_BRANCH} -m "Merge ${CURRENT_BRANCH} into gh-pages for deployment"
+  git merge ${CURRENT_BRANCH} -m "Merge ${CURRENT_BRANCH} into gh-pages for deployment" || {
+    echo -e "${RED}Merge conflicts detected. Aborting deployment.${RESET}"
+    git merge --abort
+    git checkout ${CURRENT_BRANCH}
+    exit 1
+  }
 fi
 
 # Clean up root directory (preserve .git and other important files)
@@ -58,18 +66,23 @@ find . -maxdepth 1 -not -path "./.git*" -not -path "." -not -path "./ppl-workout
 # Copy files from ppl-workout/ to root
 echo -e "${YELLOW}Copying files from ppl-workout/ to root...${RESET}"
 cp -r ppl-workout/* .
-cp ppl-workout/.nojekyll .
+# Create .nojekyll file if it doesn't exist
+touch .nojekyll
+
+# Detect repository information
+REMOTE_URL=$(git config --get remote.origin.url)
+GITHUB_USERNAME=$(echo $REMOTE_URL | sed -n 's/.*github.com[:/]\([^/]*\).*/\1/p')
+REPO_NAME=$(basename -s .git "$REMOTE_URL")
 
 # Check for repository-specific path adjustments
 echo -e "${YELLOW}Checking for path adjustments needed for GitHub Pages...${RESET}"
-REPO_NAME=$(basename -s .git `git config --get remote.origin.url`)
 
-# Prompt for path adjustments
-read -p "Do you need to adjust paths for GitHub Pages? (y/n): " ADJUST_PATHS
+# Prompt for path adjustments with default to no
+read -p "Do you need to adjust paths for GitHub Pages? (y/N): " ADJUST_PATHS
 if [[ $ADJUST_PATHS == "y" || $ADJUST_PATHS == "Y" ]]; then
   echo -e "${YELLOW}Adjusting paths in service-worker.js, manifest.json, and index.html...${RESET}"
   
-  # Example adjustments - these would need to be customized based on the actual files
+  # Example adjustments - uncomment and customize as needed
   # sed -i "s|'\./|'/${REPO_NAME}/|g" service-worker.js
   # sed -i "s|\"./|\"/${REPO_NAME}/|g" manifest.json
   # sed -i "s|src=\"./|src=\"/${REPO_NAME}/|g" index.html
@@ -80,17 +93,22 @@ fi
 # Commit and push changes
 echo -e "${YELLOW}Committing changes...${RESET}"
 git add .
-git commit -m "Update deployment $(date)"
+if git diff --staged --quiet; then
+  echo -e "${YELLOW}No changes to commit. Deployment already up to date.${RESET}"
+else
+  git commit -m "Update deployment $(date)" || { echo -e "${RED}Failed to commit changes.${RESET}"; exit 1; }
 
-echo -e "${YELLOW}Pushing to GitHub...${RESET}"
-git push origin gh-pages
+  echo -e "${YELLOW}Pushing to GitHub...${RESET}"
+  git push origin gh-pages || { echo -e "${RED}Failed to push to GitHub.${RESET}"; exit 1; }
+  echo -e "${GREEN}Successfully pushed to GitHub!${RESET}"
+fi
 
 # Return to original branch
 echo -e "${YELLOW}Returning to ${CURRENT_BRANCH} branch...${RESET}"
-git checkout ${CURRENT_BRANCH}
+git checkout ${CURRENT_BRANCH} || { echo -e "${RED}Failed to return to ${CURRENT_BRANCH} branch.${RESET}"; exit 1; }
 
 echo -e "${BOLD}${GREEN}Deployment complete!${RESET}"
-echo -e "Your PWA should be available at: ${BOLD}https://YOUR-USERNAME.github.io/${REPO_NAME}/${RESET}"
+echo -e "Your PWA should be available at: ${BOLD}https://${GITHUB_USERNAME}.github.io/${REPO_NAME}/${RESET}"
 echo -e "Note: It may take a few minutes for GitHub Pages to build and deploy your site."
 echo -e "${YELLOW}Don't forget to configure GitHub Pages in your repository settings:${RESET}"
 echo -e "1. Go to your repository on GitHub"
