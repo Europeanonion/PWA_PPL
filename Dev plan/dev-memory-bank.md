@@ -1,171 +1,60 @@
-# Push-Pull-Legs Workout App Development Memory Bank
+# Development Memory Bank
 
-## Project Overview
-- **Project Name**: Ultimate Push-Pull-Legs Workout Tracker
-- **Main File**: ppl-workout-html.html
-- **Start Date**: March 16, 2025
-- **Primary Goal**: Create a comprehensive workout tracking system with progression through phases and weeks
+## 2025-03-16 Development Update
 
-## Current Development Status
+### Completed Since Last Update
+- Created Python script to automate JSON workout file generation
+- Generated all remaining workout JSON files for all phases
+- Implemented error handling for missing data in source files
+- Added proper structure for exercise data including substitutions
 
-### 2025-03-16 Initial Setup
+### Current Status
+- Working on: Phase 1, Week 5 and remaining workout data files
+- Completed: 
+  - Phase 1, Weeks 1-6 exercise data
+  - Phase 2, Weeks 1-4 exercise data
+  - Phase 3, Weeks 1-3 exercise data
+- Pending: 
+  - Adding exercise links to all generated files
+  - Implementing localStorage functionality
+  - Creating progress tracking visualization
+- Progress on milestones: 
+  - Core Structure Complete: ✅
+  - Phase 1 Content Complete: ✅
+  - All Phases Content Complete: ✅ (based on available data)
+  - Local Storage MVP: 🔄 In progress
+  - Enhanced Local Features: 🔄 In progress
+  - Cloud Integration: ⏳ Not started
 
-#### Current Focus
-- Phase 1, Week 1 basic structure and content
-- Fixing orphaned HTML elements in the main file
-- Implementing core JavaScript functionality
+### Implementation Details
+- Created a Python script to automate the generation of workout JSON files
+- Script transforms data from the source format to the app's required format
+- Added error handling to skip weeks that don't exist in the source data
+- Implemented consistent ID generation for exercises using kebab-case
+- Formatted rest times to be more concise (e.g., "~2 min" → "2m")
+- Created proper structure for substitutions as arrays
 
-#### Completed Components
-- Basic HTML structure with responsive design
-- CSS styling framework for workout tables
-- Phase selection navigation
-- Week selection buttons
-- Initial table structure for some workout days
+### Approach Efficiency Assessment
+- Goals referenced: Minimize development time, maintain quality, ensure consistency
+- Approaches considered:
+  1. Continue manual creation of each JSON file
+  2. Create a template file and use search_and_replace
+  3. Write a Python script to automate the process
+- Selected approach: Python script automation
+- Efficiency justification: 
+  - Reduced development time from hours to seconds
+  - Eliminated human error in data transformation
+  - Ensured consistent formatting across all files
+  - Made the process repeatable if source data changes
+  - Added proper error handling for missing data
 
-#### Pending Components
-- Complete exercise data for all workout days in Phase 1, Week 1
-- Fix incomplete table structures
-- Implement proper JavaScript functions for toggling notes and substitutions
-- Add input fields for weight tracking
+### Next Steps
+- Add exercise links to all generated files
+- Implement localStorage functionality for tracking weights and completed sets
+- Create progress visualization for completed workouts
+- Add export/import functionality for user data
 
-#### Blockers/Issues
-- Some table rows appear to be outside their parent tables in the HTML
-- Need to ensure consistent structure across all workout days
-
-## Implementation Decisions
-
-### Data Structure
-- Using a hierarchical data structure organized by phase → week → day → exercise
-- Exercise data will include sets, reps, RPE, rest periods, and notes
-- Planning to implement localStorage for data persistence between sessions
-
-### UI Decisions
-- Using a tabbed interface for phases and weeks to maintain a clean UI
-- Exercise notes and substitutions will be collapsible to save screen space
-- Will implement dedicated input fields for logging weights and completed sets
-
-## Data Structures
-
-### Exercise Data Structure
-```javascript
-{
-  "name": "Bench Press",
-  "sets": 4,
-  "reps": "5-8",
-  "rpe": "8-9",
-  "rest": "3-4m",
-  "notes": "Keep shoulders retracted, feet firmly planted...",
-  "link": "https://www.example.com/bench-press-tutorial",
-  "substitutions": [
-    "Dumbbell Press",
-    "Floor Press",
-    "Machine Chest Press"
-  ]
-}
-```
-
-### Workout Progress Structure
-```javascript
-{
-  "phase1": {
-    "week1": {
-      "push1": {
-        "date": "2025-03-16",
-        "exercises": {
-          "benchPress": {
-            "weights": ["135", "155", "175", "175"],
-            "completed": [true, true, true, false],
-            "notes": "Felt strong today"
-          },
-          // Additional exercises
-        }
-      }
-      // Additional workout days
-    }
-    // Additional weeks
-  }
-  // Additional phases
-}
-```
-
-## Technical Requirements
-
-### Browser Support
-- Primary support: Chrome, Safari, Firefox (latest versions)
-- Mobile support: iOS Safari, Android Chrome
-- Ensure mobile responsive design works on screens down to 320px width
-
-### Storage Limits
-- localStorage has ~5MB limit per domain
-- Need to monitor data size as workout history accumulates
-- May need to implement data pruning for extended usage
-
-## Next Steps
-
-### Immediate Tasks
-1. Fix HTML structure issues in main file
-2. Complete Push Day 1 exercises with all required data
-3. Implement toggleNotes() and toggleSubs() JavaScript functions
-4. Create consistent table structure for all workout days
-5. Add exercise links for all Phase 1, Week 1 exercises
-
-### Short-term Goals
-1. Complete all content for Phase 1, Week 1
-2. Implement basic localStorage saving for workout data
-3. Add input fields for weight tracking
-4. Add checkboxes for completed sets
-5. Test on mobile devices
-
-## Reference Materials
-
-### RPE Scale Reference
-- RPE 10: Maximum effort, could not do more reps
-- RPE 9: Could do 1 more rep
-- RPE 8: Could do 2 more reps
-- RPE 7: Could do 3 more reps
-- RPE 6: Could do 4 more reps
-- RPE 5: Could do 5 more reps
-
-### Workout Structure
-- **Push**: Chest, shoulders, triceps
-- **Pull**: Back, biceps, rear delts
-- **Legs**: Quadriceps, hamstrings, calves, glutes
-
-## Testing Notes
-- Need to test storage functionality across multiple devices
-- Ensure all exercise links open in new tabs correctly
-- Verify that all collapsible sections work properly
-
-## Development Updates
-
-### 2025-03-16 Development Update
-
-#### Completed Since Last Update
-- Created detailed implementation plan
-- Set up project structure with all needed files
-- Attempted Excel content analysis automation
-- Created initial documentation in memory bank
-
-#### Current Status
-- Working on: Fixing HTML structure issues and completing Phase 1, Week 1 content
-- Completed: Basic app framework with navigation tabs and styling
-- Pending: Exercise data completion, localStorage implementation
-- Progress on milestones: Core Structure (~25% complete)
-
-#### Implementation Details
-- Decided to prioritize manual content completion over automated Excel parsing
-- Current HTML structure has orphaned table rows that need to be properly organized
-- Excel analysis script was created but needs refinement to properly extract workout data
-- Will focus on client-side PWA approach with localStorage as primary data storage
-
-#### Next Steps
-1. Fix HTML structure by organizing all orphaned table rows
-2. Complete Push Day 1 content with proper exercise details
-3. Ensure all JavaScript functions work correctly
-4. Add weight tracking input fields to exercise rows
-5. Implement localStorage foundation for saving workout progress
-
-#### Issues/Questions
-- Need to determine the most user-friendly structure for inputting weights/reps
-- Consider how to handle substitution exercises in the workout tracking
-- May need a more condensed mobile view for exercise tables
+### Issues/Questions
+- Some weeks are missing from the source data (Phase 2 weeks 5-6, Phase 3 weeks 4-6)
+- Need to decide how to handle missing weeks in the UI
+- Consider adding a way for users to create custom workouts for missing weeks

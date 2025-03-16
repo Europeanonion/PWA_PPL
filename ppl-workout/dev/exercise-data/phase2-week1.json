@@ -1,0 +1,392 @@
+{
+  "phase": 2,
+  "week": 1,
+  "description": "Phase 2 - Maximum Effort (Low volume, high intensity)",
+  "days": {
+    "push1": {
+      "title": "Push #1",
+      "exercises": [
+        {
+          "id": "bench-press",
+          "name": "Bench Press",
+          "warmup_sets": "2",
+          "working_sets": "1",
+          "reps": "3-5",
+          "rpe": "8-9",
+          "rest": "3-5m",
+          "link": "",
+          "notes": "Set up a comfortable arch, quick pause on the chest and explode up on each rep",
+          "substitutions": [
+            "DB Bench Press",
+            "Machine Chest Press"
+          ]
+        },
+        {
+          "id": "high-incline-smith-machine-press",
+          "name": "High-Incline Smith Machine Press",
+          "warmup_sets": "2",
+          "working_sets": "2",
+          "reps": "4-6",
+          "rpe": "10",
+          "rest": "3-4m",
+          "link": "",
+          "notes": "Set the bench at a 45-60\u00b0 incline, touch the bar to your upper chest with control",
+          "substitutions": [
+            "Incline DB Press",
+            "Incline Machine Press"
+          ]
+        },
+        {
+          "id": "egyptian-cable-lateral-raise",
+          "name": "Egyptian Cable Lateral Raise",
+          "warmup_sets": "2",
+          "working_sets": "2",
+          "reps": "6-8",
+          "rpe": "10",
+          "rest": "2-3m",
+          "link": "",
+          "notes": "Lean away from the cable. Focus on squeezing your delts.",
+          "substitutions": [
+            "DB Lateral Raise",
+            "Machine Lateral Raise"
+          ]
+        },
+        {
+          "id": "overhead-cable-triceps-extension",
+          "name": "Overhead Cable Triceps Extension",
+          "warmup_sets": "2",
+          "working_sets": "2",
+          "reps": "4-6",
+          "rpe": "10",
+          "rest": "2-3m",
+          "link": "",
+          "notes": "Do both arms at once, resist the negative",
+          "substitutions": [
+            "DB Floor Skull Crusher",
+            "DB French Press"
+          ]
+        },
+        {
+          "id": "cable-triceps-kickback",
+          "name": "Cable Triceps Kickback",
+          "warmup_sets": "1",
+          "working_sets": "2",
+          "reps": "6-8",
+          "rpe": "10",
+          "rest": "2-3m",
+          "link": "",
+          "notes": "Lean slightly forward, lock your elbow behind your torso (shoulder hyperextension)",
+          "substitutions": [
+            "DB Triceps Kickback",
+            "Triceps Pressdown"
+          ]
+        }
+      ]
+    },
+    "pull1": {
+      "title": "Pull #1",
+      "exercises": [
+        {
+          "id": "neutral-grip-lat-pulldown",
+          "name": "Neutral-Grip Lat Pulldown",
+          "warmup_sets": "3",
+          "working_sets": "3",
+          "reps": "4-6",
+          "rpe": "10",
+          "rest": "3-4m",
+          "link": "",
+          "notes": "Pull your elbows down against your sides",
+          "substitutions": [
+            "Neutral-Grip Pull-Up",
+            "Machine Pulldown"
+          ]
+        },
+        {
+          "id": "pendlay-row",
+          "name": "Pendlay Row",
+          "warmup_sets": "3",
+          "working_sets": "2",
+          "reps": "4-6",
+          "rpe": "10",
+          "rest": "3-4m",
+          "link": "",
+          "notes": "Initiate the movement by squeezing your shoulder blades together, pull to your lower chest, avoid using momentum",
+          "substitutions": [
+            "Meadows Row",
+            "Single-Arm Row"
+          ]
+        },
+        {
+          "id": "reverse-pec-deck",
+          "name": "Reverse Pec Deck",
+          "warmup_sets": "2",
+          "working_sets": "2",
+          "reps": "6-8",
+          "rpe": "10",
+          "rest": "2-3m",
+          "link": "",
+          "notes": "Swing the weight \"out\", not \"back\"",
+          "substitutions": [
+            "Reverse Cable Flye",
+            "Bent-Over Reverse DB Flye"
+          ]
+        },
+        {
+          "id": "ez-bar-curl",
+          "name": "EZ-Bar Curl",
+          "warmup_sets": "2",
+          "working_sets": "2",
+          "reps": "4-6",
+          "rpe": "10",
+          "rest": "2-3m",
+          "link": "",
+          "notes": "Arc the bar \"out\" not \"up\", focus on squeezing your biceps",
+          "substitutions": [
+            "DB Curl",
+            "Cable Curl"
+          ]
+        },
+        {
+          "id": "hammer-cheat-curl",
+          "name": "Hammer Cheat Curl",
+          "warmup_sets": "1",
+          "working_sets": "1",
+          "reps": "4-6",
+          "rpe": "10",
+          "rest": "0m",
+          "link": "",
+          "notes": "You can use slight momentum on the concentric, but control the eccentric with your elbows stationary",
+          "substitutions": [
+            "Inverse Zottman Curl",
+            "DB Curl"
+          ]
+        }
+      ]
+    },
+    "legs1": {
+      "title": "Legs #1",
+      "exercises": [
+        {
+          "id": "squat-or-machine-squat",
+          "name": "Squat or Machine Squat",
+          "warmup_sets": "2",
+          "working_sets": "1",
+          "reps": "3-5",
+          "rpe": "8-9",
+          "rest": "3-5m",
+          "link": "",
+          "notes": "Sit back and down, keep your upper back tight to the bar",
+          "substitutions": [
+            "Machine Squat",
+            "Bulgarian Split Squat"
+          ]
+        },
+        {
+          "id": "barbell-rdl",
+          "name": "Barbell RDL",
+          "warmup_sets": "3",
+          "working_sets": "2",
+          "reps": "4-6",
+          "rpe": "10",
+          "rest": "3-4m",
+          "link": "",
+          "notes": "Maintain a neutral lower back, set your hips back, don't allow your spine to round",
+          "substitutions": [
+            "DB RDL",
+            "45\u00b0 Hyperextension"
+          ]
+        },
+        {
+          "id": "leg-extension",
+          "name": "Leg Extension",
+          "warmup_sets": "2",
+          "working_sets": "2",
+          "reps": "6-8",
+          "rpe": "10",
+          "rest": "2-3m",
+          "link": "",
+          "notes": "Focus on squeezing your quads to make the weight move.",
+          "substitutions": [
+            "DB Step-Up",
+            "Goblet Squat"
+          ]
+        },
+        {
+          "id": "seated-calf-raise",
+          "name": "Seated Calf Raise",
+          "warmup_sets": "2",
+          "working_sets": "2",
+          "reps": "4-6",
+          "rpe": "10",
+          "rest": "2-3m",
+          "link": "",
+          "notes": "Press all the way up to your toes, stretch your calves at the bottom, don't bounce",
+          "substitutions": [
+            "Standing Calf Raise",
+            "Leg Press Toe Press"
+          ]
+        },
+        {
+          "id": "cable-crunch",
+          "name": "Cable Crunch",
+          "warmup_sets": "2",
+          "working_sets": "2",
+          "reps": "6-8",
+          "rpe": "10",
+          "rest": "2-3m",
+          "link": "",
+          "notes": "Round your back as you crunch",
+          "substitutions": [
+            "Plate-Weighted Crunch",
+            "Machine Crunch"
+          ]
+        }
+      ]
+    },
+    "push2": {
+      "title": "Push #2",
+      "exercises": [
+        {
+          "id": "seated-db-shoulder-press",
+          "name": "Seated DB Shoulder Press",
+          "warmup_sets": "3",
+          "working_sets": "2",
+          "reps": "6-8",
+          "rpe": "10",
+          "rest": "3-4m",
+          "link": "",
+          "notes": "Bring the dumbbells all the way down, keep your torso upright",
+          "substitutions": [
+            "Machine Shoulder Press",
+            "Standing DB Arnold Press"
+          ]
+        },
+        {
+          "id": "weighted-dip",
+          "name": "Weighted Dip",
+          "warmup_sets": "3",
+          "working_sets": "2",
+          "reps": "4-6",
+          "rpe": "10",
+          "rest": "3-4m",
+          "link": "",
+          "notes": "Tuck your elbows at 45\u00b0, lean your torso forward 15\u00b0, shoulder width or slightly wider grip",
+          "substitutions": [
+            "Machine Chest Press",
+            "DB Bench Press"
+          ]
+        },
+        {
+          "id": "machine-lateral-raise",
+          "name": "Machine Lateral Raise",
+          "warmup_sets": "2",
+          "working_sets": "2",
+          "reps": "6-8",
+          "rpe": "10",
+          "rest": "2-3m",
+          "link": "",
+          "notes": "Focus on squeezing your lateral delt to move the weight",
+          "substitutions": [
+            "DB Lateral Raise",
+            "Cable Lateral Raise"
+          ]
+        },
+        {
+          "id": "triceps-pressdown",
+          "name": "Triceps Pressdown",
+          "warmup_sets": "2",
+          "working_sets": "2",
+          "reps": "4-6",
+          "rpe": "10",
+          "rest": "2-3m",
+          "link": "",
+          "notes": "Focus on squeezing your triceps to move the weight",
+          "substitutions": [
+            "Cable Triceps Kickback",
+            "DB Triceps Kickback"
+          ]
+        }
+      ]
+    },
+    "pull2": {
+      "title": "Pull #2",
+      "exercises": [
+        {
+          "id": "wide-grip-pull-up",
+          "name": "Wide-Grip Pull-Up",
+          "warmup_sets": "3",
+          "working_sets": "2",
+          "reps": "4-6",
+          "rpe": "10",
+          "rest": "3-4m",
+          "link": "",
+          "notes": "Use ~1.5x shoulder width grip. Add weight or use assistance as needed to hit RPE. Keep form as consistent as possible.",
+          "substitutions": [
+            "Wide-Grip Lat Pulldown",
+            "Machine Pulldown"
+          ]
+        },
+        {
+          "id": "close-grip-seated-cable-row",
+          "name": "Close-Grip Seated Cable Row",
+          "warmup_sets": "3",
+          "working_sets": "2",
+          "reps": "4-6",
+          "rpe": "10",
+          "rest": "3-4m",
+          "link": "",
+          "notes": "Focus on squeezing your shoulder blades together, drive your elbows down and back.",
+          "substitutions": [
+            "T-Bar Row",
+            "Incline Chest-Supported DB Row"
+          ]
+        },
+        {
+          "id": "machine-shrug",
+          "name": "Machine Shrug",
+          "warmup_sets": "2",
+          "working_sets": "2",
+          "reps": "4-6",
+          "rpe": "10",
+          "rest": "2-3m",
+          "link": "",
+          "notes": "Shrug up and in. Pull your shoulders up to your ears.",
+          "substitutions": [
+            "Cable Shrug-In",
+            "DB Shrug"
+          ]
+        },
+        {
+          "id": "alternating-db-curl",
+          "name": "Alternating DB Curl",
+          "warmup_sets": "2",
+          "working_sets": "2",
+          "reps": "4-6",
+          "rpe": "10",
+          "rest": "2-3m",
+          "link": "",
+          "notes": "Alternate arms with each curl: do 1 rep with your right arm, one rep with your left arm. Repeat until you reach 4-6 reps with each arm.",
+          "substitutions": [
+            "EZ Bar Curl",
+            "Cable Curl"
+          ]
+        },
+        {
+          "id": "1-arm-db-preacher-curl",
+          "name": "1-Arm DB Preacher Curl",
+          "warmup_sets": "1",
+          "working_sets": "1",
+          "reps": "6-8",
+          "rpe": "10",
+          "rest": "0m",
+          "link": "",
+          "notes": "Here, do all 6-8 reps with one arm at a time (do not alternate)",
+          "substitutions": [
+            "Spider Curl",
+            "Bayesian Cable Curl"
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -2,87 +2,16 @@
 
 import json
 import os
-import argparse
+import re
 from html import escape
 
-def generate_html_from_analysis(analysis_file):
-    """
-    Generates HTML structure for the PPL workout app based on analysis JSON.
-    
-    Args:
-        analysis_file (str): Path to the analysis JSON file
-    
-    Returns:
-        str: Generated HTML content
-    """
-    print(f"Generating HTML from analysis file: {analysis_file}")
-    
-    try:
-        # Load the analysis data
-        with open(analysis_file, 'r') as f:
-            analysis = json.load(f)
-        
-        # Generate HTML structure
-        html = generate_ppl_html_structure(analysis)
-        
-        # Save the HTML to a file
-        output_file = os.path.splitext(analysis_file)[0] + ".html"
-        with open(output_file, 'w') as f:
-            f.write(html)
-        
-        print(f"HTML generated successfully. Saved to {output_file}")
-        
-        return html
-        
-    except Exception as e:
-        print(f"Error generating HTML: {str(e)}")
-        return None
+def load_workout_data(json_file):
+    """Load workout data from JSON file"""
+    with open(json_file, 'r') as f:
+        return json.load(f)
 
-def generate_exercise_id(name):
-    """
-    Generate a safe ID from exercise name for HTML/JS.
-    
-    Args:
-        name (str): Exercise name
-        
-    Returns:
-        str: Safe ID
-    """
-    # Remove non-alphanumeric characters and convert spaces to hyphens
-    safe_id = ''.join(c for c in name.lower().replace(' ', '-') if c.isalnum() or c == '-')
-    return safe_id
-
-def get_phase_description(phase):
-    """
-    Get description for a workout phase.
-    
-    Args:
-        phase (int): Phase number
-        
-    Returns:
-        str: Phase description
-    """
-    descriptions = {
-        1: "building a foundation with moderate volume and intensity",
-        2: "progressive overload with increasing weights and controlled volume",
-        3: "peak intensity and specialized techniques for maximum results"
-    }
-    return descriptions.get(phase, "progressive overload and consistent training")
-
-def generate_ppl_html_structure(analysis):
-    """
-    Creates the full HTML structure for the PPL workout app.
-    
-    Args:
-        analysis (dict): The analysis data
-    
-    Returns:
-        str: Complete HTML document
-    """
-    program_structure = analysis["program_structure"]
-    workout_data = analysis["workout_data"]
-    
-    # Start building HTML
+def generate_html(workout_data):
+    """Generate HTML from workout data"""
     html = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -90,56 +19,67 @@ def generate_ppl_html_structure(analysis):
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Ultimate Push Pull Legs System</title>
     <style>
+        :root {
+            --primary-color: #C38803;
+            --secondary-color: #404040;
+            --background-color: #f5f5f7;
+            --card-background: white;
+            --text-color: #333;
+            --link-color: #006CFF;
+            --odd-row-color: #FEF7F0;
+            --even-row-color: #FBF2EA;
+            --notes-background: #f9f9f9;
+            --substitution-background: #f0f8ff;
+        }
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
             line-height: 1.6;
-            color: #333;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-            background-color: #f9f9f9;
         }
         
         header {
-            background-color: #C38803;
+            background-color: #1a1a1a;
             color: white;
-            padding: 15px;
             text-align: center;
-            margin-bottom: 20px;
-            border-radius: 0 0 10px 10px;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         
         h1 {
             margin: 0;
-            font-size: 28px;
+            font-size: 24px;
         }
         
         .phase-selector {
             display: flex;
             justify-content: center;
-            margin-bottom: 20px;
+            margin-top: 10px;
         }
         
         .phase-btn {
-            padding: 10px 20px;
-            margin: 0 5px;
-            background-color: #f0f0f0;
+            background-color: #333;
+            color: white;
             border: none;
+            padding: 8px 12px;
+            margin: 0 5px;
             border-radius: 5px;
             cursor: pointer;
-            transition: all 0.3s;
         }
         
         .phase-btn.active {
-            background-color: #C38803;
-            color: white;
+            background-color: var(--primary-color);
         }
         
         .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            max-width: 100%;
+            margin: 0 auto;
         }
         
         .phase-content {
@@ -151,33 +91,34 @@ def generate_ppl_html_structure(analysis):
         }
         
         .phase-description {
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: #f9f9f9;
-            border-left: 4px solid #C38803;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
         }
         
         .week-selector {
             display: flex;
             flex-wrap: wrap;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            justify-content: center;
         }
         
         .week-btn {
-            padding: 8px 15px;
-            margin: 5px;
-            background-color: #f0f0f0;
+            background-color: var(--secondary-color);
+            color: white;
             border: none;
+            padding: 8px 12px;
+            margin: 5px;
             border-radius: 5px;
             cursor: pointer;
-            flex-grow: 1;
-            text-align: center;
-            transition: all 0.3s;
         }
         
         .week-btn.active {
-            background-color: #C38803;
-            color: white;
+            background-color: var(--primary-color);
         }
         
         .week-content {
@@ -189,25 +130,28 @@ def generate_ppl_html_structure(analysis):
         }
         
         .workout-day {
-            margin-bottom: 30px;
+            background-color: var(--card-background);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
         
         .day-header {
-            background-color: #404040;
+            background-color: var(--primary-color);
             color: white;
-            padding: 10px 15px;
-            margin-bottom: 15px;
-            border-radius: 5px;
+            padding: 12px 15px;
+            font-weight: bold;
+            font-size: 18px;
         }
         
         .exercise-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
         }
         
         .table-header {
-            background-color: #404040;
+            background-color: var(--secondary-color);
             color: white;
             padding: 10px 5px;
             text-align: center;
@@ -220,11 +164,11 @@ def generate_ppl_html_structure(analysis):
         }
         
         .exercise-row:nth-child(odd) {
-            background-color: #FEF7F0;
+            background-color: var(--odd-row-color);
         }
         
         .exercise-row:nth-child(even) {
-            background-color: #FBF2EA;
+            background-color: var(--even-row-color);
         }
         
         .exercise-name {
@@ -239,7 +183,7 @@ def generate_ppl_html_structure(analysis):
         }
         
         .exercise-link {
-            color: #006CFF;
+            color: var(--link-color);
             text-decoration: none;
         }
         
@@ -247,59 +191,84 @@ def generate_ppl_html_structure(analysis):
             display: inline-block;
             width: 16px;
             height: 16px;
-            background-color: #006CFF;
+            background-color: var(--link-color);
             color: white;
             border-radius: 50%;
             text-align: center;
-            font-size: 12px;
             line-height: 16px;
+            font-size: 12px;
             margin-left: 5px;
             cursor: pointer;
         }
         
         .exercise-notes {
             display: none;
-        }
-        
-        .notes-content {
-            padding: 15px;
-            background-color: #f9f9f9;
+            background-color: var(--notes-background);
+            padding: 10px;
             font-size: 14px;
-            border-left: 3px solid #006CFF;
+            border-top: 1px solid #eee;
         }
         
         .substitutions {
             display: none;
-        }
-        
-        .subs-content {
-            padding: 15px;
-            background-color: #f9f9f9;
+            background-color: var(--substitution-background);
+            padding: 10px;
             font-size: 14px;
-            border-left: 3px solid #28a745;
+            border-top: 1px solid #eee;
         }
         
-        @media (max-width: 768px) {
-            .week-btn {
-                flex-basis: calc(33.333% - 10px);
-            }
-            
-            .exercise-table {
-                font-size: 13px;
-            }
-            
-            .table-header, .exercise-data {
-                padding: 8px 3px;
-            }
+        .sub-btn {
+            background-color: #e0e0e0;
+            border: none;
+            padding: 6px 10px;
+            margin-top: 5px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
         }
         
-        @media (max-width: 480px) {
-            .week-btn {
-                flex-basis: calc(50% - 10px);
-            }
-            
-            .exercise-table {
+        .weight-input {
+            width: 50px;
+            padding: 4px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        
+        .checkbox-container {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #666;
+            background-color: #e5e5e7;
+        }
+        
+        /* For iPhone compatibility */
+        @media (max-width: 414px) {
+            .table-header {
                 font-size: 12px;
+                padding: 8px 2px;
+            }
+            
+            .exercise-name {
+                font-size: 14px;
+                padding: 10px 5px;
+            }
+            
+            .exercise-data {
+                font-size: 12px;
+                padding: 10px 2px;
+            }
+            
+            .weight-input {
+                width: 40px;
+                padding: 2px;
             }
         }
     </style>
@@ -307,202 +276,284 @@ def generate_ppl_html_structure(analysis):
 <body>
     <header>
         <h1>The Ultimate Push Pull Legs System</h1>
+        <div class="phase-selector">
+            <button class="phase-btn active" onclick="showPhase('phase1')">Phase 1</button>
+            <button class="phase-btn" onclick="showPhase('phase2')">Phase 2</button>
+            <button class="phase-btn" onclick="showPhase('phase3')">Phase 3</button>
+        </div>
     </header>
     
     <div class="container">
-        <div class="phase-selector">
 """
-    
-    # Add phase selector buttons
-    for phase in sorted(program_structure["phases"]):
-        active_class = "active" if phase == 1 else ""
-        html += f'            <button class="phase-btn {active_class}" data-phase="{phase}" onclick="showPhase({phase})">Phase {phase}</button>\n'
-    
-    html += """        </div>
+
+    # Generate content for each phase
+    for phase_num in range(1, 4):
+        phase_key = f"phase{phase_num}"
+        phase_data = workout_data["phases"].get(phase_key, {})
+        phase_description = phase_data.get("description", f"Phase {phase_num}")
         
-"""
-    
-    # Add content for each phase
-    for phase in sorted(program_structure["phases"]):
-        phase_key = f"phase{phase}"
-        active_class = "active" if phase == 1 else ""
-        
-        html += f"""        <div id="phase{phase}" class="phase-content {active_class}">
-            <div class="phase-description">
-                <h2>Phase {phase}</h2>
-                <p>This phase focuses on {get_phase_description(phase)}. Follow the program as written for best results.</p>
-            </div>
+        # Phase content div
+        active_class = "active" if phase_num == 1 else ""
+        html += f"""
+        <!-- PHASE {phase_num} -->
+        <div id="{phase_key}" class="phase-content {active_class}">
+            <div class="phase-description">{phase_description}</div>
             
             <div class="week-selector">
 """
         
-        # Add week selector buttons for this phase
-        for week in range(1, program_structure["weeks_per_phase"] + 1):
-            active_class = "active" if week == 1 else ""
-            html += f'                <button class="week-btn {active_class}" data-week="{week}" onclick="showWeek({phase}, {week})">Week {week}</button>\n'
+        # Week buttons
+        for week_num in range(1, 7):
+            week_key = f"week{week_num}"
+            active_class = "active" if week_num == 1 else ""
+            html += f"""                <button class="week-btn {active_class}" onclick="showWeek('{phase_key}', '{week_key}')">Week {week_num}</button>
+"""
         
         html += """            </div>
             
 """
         
-        # Add content for each week in this phase
-        for week in range(1, program_structure["weeks_per_phase"] + 1):
-            week_key = f"week{week}"
-            active_class = "active" if week == 1 else ""
+        # Week content
+        for week_num in range(1, 7):
+            week_key = f"week{week_num}"
+            week_data = phase_data.get("weeks", {}).get(week_key, {})
+            active_class = "active" if week_num == 1 else ""
             
-            html += f"""            <div class="week{week} week-content {active_class}">
+            html += f"""            <!-- Week {week_num} Content -->
+            <div id="{phase_key}-{week_key}" class="week-content {active_class}">
 """
             
-            # Add content for each workout day in this week
-            if phase_key in workout_data and week_key in workout_data[phase_key]:
-                for day_key, exercises in workout_data[phase_key][week_key].items():
-                    # Format day name for display
-                    day_type = day_key[:-1].capitalize()  # Extract 'push', 'pull', or 'legs' and capitalize
-                    day_num = day_key[-1]
-                    
-                    html += f"""                <div class="workout-day">
-                    <h3 class="day-header">{day_type} Day #{day_num}</h3>
+            # If we have data for this week
+            if week_data:
+                # Generate workout days
+                for day_type in ["push1", "pull1", "legs1", "push2", "pull2", "legs2"]:
+                    day_data = week_data.get(day_type, [])
+                    if day_data:
+                        day_name = day_type.replace("1", " #1").replace("2", " #2").title()
+                        
+                        html += f"""                <!-- {day_name} -->
+                <div class="workout-day">
+                    <div class="day-header">{day_name}</div>
                     <table class="exercise-table">
                         <tr>
-                            <th class="table-header" style="width: 30%;">Exercise</th>
-                            <th class="table-header" style="width: 8%;">Sets</th>
-                            <th class="table-header" style="width: 10%;">Reps</th>
-                            <th class="table-header" style="width: 12%;">Rest</th>
-                            <th class="table-header" style="width: 8%;">RPE</th>
-                            <th class="table-header" style="width: 10%;">Demo</th>
+                            <th class="table-header" style="width: 35%;">Exercise</th>
+                            <th class="table-header" style="width: 15%;">Warm-up</th>
+                            <th class="table-header" style="width: 15%;">Working</th>
+                            <th class="table-header" style="width: 15%;">Reps</th>
+                            <th class="table-header" style="width: 10%;">RPE</th>
+                            <th class="table-header" style="width: 10%;">Rest</th>
                         </tr>
+                        
 """
-                    
-                    # Add exercises
-                    for ex in exercises:
-                        if 'name' in ex:
-                            # Generate a safe exercise ID for JavaScript functions
-                            ex_id = generate_exercise_id(ex['name'])
+                        
+                        # Generate exercises
+                        for i, exercise in enumerate(day_data):
+                            exercise_id = f"{phase_key}-{week_key}-{day_type}-ex{i}"
+                            notes_id = f"{exercise_id}-notes"
+                            subs_id = f"{exercise_id}-subs"
                             
+                            # Clean up exercise name for ID
+                            clean_name = re.sub(r'[^a-zA-Z0-9]', '-', exercise["name"].lower())
+                            
+                            # Exercise row
                             html += f"""                        <tr class="exercise-row">
-                            <td class="exercise-name">{escape(ex['name'])} <span class="info-icon" onclick="toggleNotes('{ex_id}')">i</span></td>
-                            <td class="exercise-data">{ex.get('sets', '')}</td>
-                            <td class="exercise-data">{ex.get('reps', '')}</td>
-                            <td class="exercise-data">{ex.get('rest', '')}</td>
-                            <td class="exercise-data">{ex.get('rpe', '')}</td>
-                            <td class="exercise-data"><a href="#" class="exercise-link" target="_blank">View</a></td>
-                        </tr>
-                        <tr id="{ex_id}-notes" class="exercise-notes">
-                            <td colspan="6">
-                                <div class="notes-content">
-                                    <strong>Form Notes:</strong>
-                                    <p>{ex.get('notes', 'Focus on proper form and technique.')}</p>
-                                    <button onclick="toggleSubs('{ex_id}')">View Substitutions</button>
-                                </div>
+                            <td class="exercise-name">
+                                <a href="#" class="exercise-link">{exercise["name"]}</a>
+                                <span class="info-icon" onclick="toggleNotes('{notes_id}')">i</span>
                             </td>
+                            <td class="exercise-data">{exercise["warmup_sets"]}</td>
+                            <td class="exercise-data">{exercise["working_sets"]}</td>
+                            <td class="exercise-data">{exercise["reps"]}</td>
+                            <td class="exercise-data">{exercise["rpe"]}</td>
+                            <td class="exercise-data">{exercise["rest"]}</td>
                         </tr>
-                        <tr id="{ex_id}-subs" class="substitutions">
+                        <tr id="{notes_id}" class="exercise-notes">
                             <td colspan="6">
-                                <div class="subs-content">
-                                    <strong>Substitutions:</strong>
-                                    <ul>
-                                        <li>Alternative 1</li>
-                                        <li>Alternative 2</li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
+                                <strong>Notes:</strong> {exercise["notes"]}
 """
-                    
-                    html += """                    </table>
+                            
+                            # Add substitutions if available
+                            if exercise["substitution1"] or exercise["substitution2"]:
+                                html += f"""                                <br><br>
+                                <button class="sub-btn" onclick="toggleSubs('{subs_id}')">Show Substitutions</button>
+                                <div id="{subs_id}" class="substitutions">
+                                    <strong>Substitution Options:</strong>
+"""
+                                if exercise["substitution1"]:
+                                    html += f"""                                    <br>1. {exercise["substitution1"]}
+"""
+                                if exercise["substitution2"]:
+                                    html += f"""                                    <br>2. {exercise["substitution2"]}
+"""
+                                html += """                                </div>
+"""
+                            
+                            html += """                            </td>
+                        </tr>
+                        
+"""
+                        
+                        html += """                    </table>
+                </div>
+                
+"""
+            else:
+                # Placeholder for weeks without data
+                html += f"""                <div class="workout-day">
+                    <div class="day-header">Week {week_num}</div>
+                    <p style="padding: 20px; text-align: center;">Week {week_num} content would follow the same structure as Week 1, with progressive overload applied.</p>
                 </div>
 """
             
             html += """            </div>
+            
 """
         
         html += """        </div>
+        
 """
     
-    # Add JavaScript functions
+    # Footer and JavaScript
     html += """    </div>
     
     <footer>
-        <p>&copy; 2025 Push Pull Legs Workout System</p>
+        <p>The Ultimate Push Pull Legs System - Save this page for offline use</p>
+        <p>To use offline: Open in Safari, tap share icon, then "Add to Home Screen"</p>
+        <p>Each phase is 6 weeks long. Complete all three phases for maximum results.</p>
     </footer>
     
     <script>
-        function showPhase(phaseNumber) {
-            // Hide all phases
-            document.querySelectorAll('.phase-content').forEach(phase => {
-                phase.classList.remove('active');
-            });
-            
-            // Show selected phase
-            document.getElementById(`phase${phaseNumber}`).classList.add('active');
-            
-            // Update active button
-            document.querySelectorAll('.phase-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.querySelector(`.phase-btn[data-phase="${phaseNumber}"]`).classList.add('active');
-            
-            // Default to first week
-            showWeek(phaseNumber, 1);
+        // Initialize localStorage if it doesn't exist
+        if (!localStorage.getItem('pplWorkoutData')) {
+            localStorage.setItem('pplWorkoutData', JSON.stringify({}));
         }
         
-        function showWeek(phaseNumber, weekNumber) {
-            // Hide all weeks in current phase
-            document.querySelectorAll(`#phase${phaseNumber} .week-content`).forEach(week => {
-                week.classList.remove('active');
+        function showPhase(phaseId) {
+            // Hide all phase content
+            const phaseContents = document.querySelectorAll('.phase-content');
+            phaseContents.forEach(content => {
+                content.classList.remove('active');
             });
             
-            // Show selected week
-            document.querySelector(`#phase${phaseNumber} .week${weekNumber}`).classList.add('active');
-            
-            // Update active button
-            document.querySelectorAll(`#phase${phaseNumber} .week-btn`).forEach(btn => {
+            // Deactivate all phase buttons
+            const phaseButtons = document.querySelectorAll('.phase-btn');
+            phaseButtons.forEach(btn => {
                 btn.classList.remove('active');
             });
-            document.querySelector(`#phase${phaseNumber} .week-btn[data-week="${weekNumber}"]`).classList.add('active');
+            
+            // Show selected phase content
+            document.getElementById(phaseId).classList.add('active');
+            
+            // Activate selected phase button
+            const activeButton = document.querySelector(`.phase-btn[onclick="showPhase('${phaseId}')"]`);
+            activeButton.classList.add('active');
+            
+            // Reset week selection for the selected phase
+            showWeek(phaseId, 'week1');
         }
         
-        function toggleNotes(exerciseId) {
-            const notesRow = document.getElementById(`${exerciseId}-notes`);
-            if (notesRow.style.display === 'table-row') {
-                notesRow.style.display = 'none';
+        function showWeek(phaseId, weekId) {
+            // Hide all week content for the current phase
+            const weekContents = document.querySelectorAll(`#${phaseId} .week-content`);
+            weekContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Deactivate all week buttons for the current phase
+            const weekButtons = document.querySelectorAll(`#${phaseId} .week-btn`);
+            weekButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected week content
+            document.getElementById(`${phaseId}-${weekId}`).classList.add('active');
+            
+            // Activate selected week button
+            const activeButton = document.querySelector(`#${phaseId} .week-btn[onclick="showWeek('${phaseId}', '${weekId}')"]`);
+            activeButton.classList.add('active');
+        }
+        
+        function toggleNotes(noteId) {
+            const notesElement = document.getElementById(noteId);
+            if (notesElement.style.display === 'table-row') {
+                notesElement.style.display = 'none';
             } else {
-                // Hide all other notes first
-                document.querySelectorAll('.exercise-notes').forEach(note => {
-                    note.style.display = 'none';
-                });
-                notesRow.style.display = 'table-row';
+                notesElement.style.display = 'table-row';
             }
         }
         
-        function toggleSubs(exerciseId) {
-            const subsRow = document.getElementById(`${exerciseId}-subs`);
-            if (subsRow.style.display === 'table-row') {
-                subsRow.style.display = 'none';
+        function toggleSubs(subsId) {
+            const subsElement = document.getElementById(subsId);
+            if (subsElement.style.display === 'block') {
+                subsElement.style.display = 'none';
             } else {
-                // Hide all other substitution rows first
-                document.querySelectorAll('.substitutions').forEach(sub => {
-                    sub.style.display = 'none';
-                });
-                subsRow.style.display = 'table-row';
+                subsElement.style.display = 'block';
             }
+        }
+        
+        function saveWeight(exerciseId, setIndex, value) {
+            const workoutData = JSON.parse(localStorage.getItem('pplWorkoutData'));
+            
+            // Parse the exerciseId to get phase, week, day, and exercise
+            const [phase, week, day, exNum] = exerciseId.split('-');
+            
+            // Initialize nested objects if they don't exist
+            if (!workoutData[phase]) workoutData[phase] = {};
+            if (!workoutData[phase][week]) workoutData[phase][week] = {};
+            if (!workoutData[phase][week][day]) workoutData[phase][week][day] = {};
+            if (!workoutData[phase][week][day][exNum]) workoutData[phase][week][day][exNum] = {
+                weights: [],
+                completed: []
+            };
+            
+            // Save the weight
+            workoutData[phase][week][day][exNum].weights[setIndex] = value;
+            
+            // Save to localStorage
+            localStorage.setItem('pplWorkoutData', JSON.stringify(workoutData));
+        }
+        
+        function toggleCompleted(exerciseId, setIndex, checked) {
+            const workoutData = JSON.parse(localStorage.getItem('pplWorkoutData'));
+            
+            // Parse the exerciseId to get phase, week, day, and exercise
+            const [phase, week, day, exNum] = exerciseId.split('-');
+            
+            // Initialize nested objects if they don't exist
+            if (!workoutData[phase]) workoutData[phase] = {};
+            if (!workoutData[phase][week]) workoutData[phase][week] = {};
+            if (!workoutData[phase][week][day]) workoutData[phase][week][day] = {};
+            if (!workoutData[phase][week][day][exNum]) workoutData[phase][week][day][exNum] = {
+                weights: [],
+                completed: []
+            };
+            
+            // Save the completion status
+            workoutData[phase][week][day][exNum].completed[setIndex] = checked;
+            
+            // Save to localStorage
+            localStorage.setItem('pplWorkoutData', JSON.stringify(workoutData));
         }
     </script>
 </body>
-</html>"""
+</html>
+"""
     
     return html
 
 def main():
-    parser = argparse.ArgumentParser(description='Generate HTML from workout analysis JSON')
-    parser.add_argument('analysis_file', help='Path to the analysis JSON file')
-    args = parser.parse_args()
+    # Load workout data
+    json_file = "The Ultimate Push Pull Legs System - 6x (2)_workout_data.json"
+    workout_data = load_workout_data(json_file)
     
-    if not os.path.isfile(args.analysis_file):
-        print(f"Error: File {args.analysis_file} not found")
-        return
+    # Generate HTML
+    html = generate_html(workout_data)
     
-    generate_html_from_analysis(args.analysis_file)
+    # Write HTML to file
+    with open("ppl-workout-html.html", "w") as f:
+        f.write(html)
+    
+    print(f"HTML file generated: ppl-workout-html.html")
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

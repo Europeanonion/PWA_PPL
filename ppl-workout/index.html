@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Ultimate Push Pull Legs System</title>
+    <meta name="description" content="Track your progress through the Push-Pull-Legs workout program">
+    <meta name="theme-color" content="#C38803">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+    <link rel="stylesheet" href="assets/css/weight-tracker.css">
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -238,6 +243,12 @@
     </header>
     
     <div class="container">
+        <div class="data-management">
+            <button onclick="workoutStorage.exportData()">Export Data</button>
+            <button onclick="document.getElementById('import-file').click()">Import Data</button>
+            <button onclick="workoutStorage.clearData()">Clear Data</button>
+            <input type="file" id="import-file" style="display: none;" accept="application/json" onchange="workoutStorage.importData(this.files[0])">
+        </div>
         <!-- PHASE 1 -->
         <div id="phase1" class="phase-content active">
             <div class="phase-description">Phase 1 - Base Hypertrophy (Moderate Volume, Moderate Intensity)</div>
@@ -272,7 +283,18 @@
                                 <span class="info-icon" onclick="toggleNotes('pause-squat-notes')">i</span>
                             </td>
                             <td class="exercise-data">0</td>
-                            <td class="exercise-data">2</td>
+                            <td class="exercise-data">
+                                <div class="set-inputs">
+                                    <div class="set-row">
+                                        <input type="number" class="weight-input" data-exercise="pause-squat" data-set="1" placeholder="lbs">
+                                        <input type="checkbox" class="completed-checkbox" data-exercise="pause-squat" data-set="1" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
+                                    </div>
+                                    <div class="set-row">
+                                        <input type="number" class="weight-input" data-exercise="pause-squat" data-set="2" placeholder="lbs">
+                                        <input type="checkbox" class="completed-checkbox" data-exercise="pause-squat" data-set="2" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
+                                    </div>
+                                </div>
+                            </td>
                             <td class="exercise-data">5</td>
                             <td class="exercise-data">8-9</td>
                             <td class="exercise-data">3-4m</td>
@@ -296,8 +318,38 @@
                                 <span class="info-icon" onclick="toggleNotes('rdl-notes')">i</span>
                             </td>
                             <td class="exercise-data">2</td>
-                            <td class="exercise-data">3</td>
-                            <td class="exercise-data">8</td>
+                            <td class="exercise-data">
+                                <div class="set-inputs">
+                                    <div class="set-row">
+                                        <input type="number" class="weight-input" data-exercise="romanian-deadlift" data-set="1" placeholder="lbs">
+                                        <input type="checkbox" class="completed-checkbox" data-exercise="romanian-deadlift" data-set="1" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
+                                    </div>
+                                    <div class="set-row">
+                                        <input type="number" class="weight-input" data-exercise="romanian-deadlift" data-set="2" placeholder="lbs">
+                                        <input type="checkbox" class="completed-checkbox" data-exercise="romanian-deadlift" data-set="2" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
+                                    </div>
+                                    <div class="set-row">
+                                        <input type="number" class="weight-input" data-exercise="romanian-deadlift" data-set="3" placeholder="lbs">
+                                        <input type="checkbox" class="completed-checkbox" data-exercise="romanian-deadlift" data-set="3" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="exercise-data">
+                                <div class="set-inputs">
+                                    <div class="set-row">
+                                        <input type="number" class="weight-input" data-exercise="bulgarian-split-squat" data-set="1" placeholder="lbs">
+                                        <input type="checkbox" class="completed-checkbox" data-exercise="bulgarian-split-squat" data-set="1" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
+                                    </div>
+                                    <div class="set-row">
+                                        <input type="number" class="weight-input" data-exercise="bulgarian-split-squat" data-set="2" placeholder="lbs">
+                                        <input type="checkbox" class="completed-checkbox" data-exercise="bulgarian-split-squat" data-set="2" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
+                                    </div>
+                                    <div class="set-row">
+                                        <input type="number" class="weight-input" data-exercise="bulgarian-split-squat" data-set="3" placeholder="lbs">
+                                        <input type="checkbox" class="completed-checkbox" data-exercise="bulgarian-split-squat" data-set="3" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
+                                    </div>
+                                </div>
+                            </td>
                             <td class="exercise-data">8-9</td>
                             <td class="exercise-data">2-3m</td>
                         </tr>
@@ -320,7 +372,22 @@
                                 <span class="info-icon" onclick="toggleNotes('bss-notes')">i</span>
                             </td>
                             <td class="exercise-data">1</td>
-                            <td class="exercise-data">3</td>
+                            <td class="exercise-data">
+                                <div class="set-inputs">
+                                    <div class="set-row">
+                                        <input type="number" class="weight-input" data-exercise="lying-leg-curl" data-set="1" placeholder="lbs">
+                                        <input type="checkbox" class="completed-checkbox" data-exercise="lying-leg-curl" data-set="1" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
+                                    </div>
+                                    <div class="set-row">
+                                        <input type="number" class="weight-input" data-exercise="lying-leg-curl" data-set="2" placeholder="lbs">
+                                        <input type="checkbox" class="completed-checkbox" data-exercise="lying-leg-curl" data-set="2" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
+                                    </div>
+                                    <div class="set-row">
+                                        <input type="number" class="weight-input" data-exercise="lying-leg-curl" data-set="3" placeholder="lbs">
+                                        <input type="checkbox" class="completed-checkbox" data-exercise="lying-leg-curl" data-set="3" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
+                                    </div>
+                                </div>
+                            </td>
                             <td class="exercise-data">10</td>
                             <td class="exercise-data">9</td>
                             <td class="exercise-data">1-2m</td>
@@ -457,11 +524,18 @@
                         
                         <tr class="exercise-row">
                             <td class="exercise-name">
-                                <a href="https://youtu.be/vcBig73ojpE?t=134" class="exercise-link">Bench Press</a>
+                                <a href="https://youtu.be/vcBig73ojpE?t=134" class="exercise-link" target="_blank" rel="noopener">Bench Press</a>
                                 <span class="info-icon" onclick="toggleNotes('ph2-bench-press-notes')">i</span>
                             </td>
                             <td class="exercise-data">3-4</td>
-                            <td class="exercise-data">1</td>
+                            <td class="exercise-data">
+                                <div class="set-inputs">
+                                    <div class="set-row">
+                                        <input type="number" class="weight-input" data-exercise="bench-press" data-set="1" placeholder="lbs">
+                                        <input type="checkbox" class="completed-checkbox" data-exercise="bench-press" data-set="1" onchange="if(this.checked) this.closest('.set-row').classList.add('completed'); else this.closest('.set-row').classList.remove('completed');">
+                                    </div>
+                                </div>
+                            </td>
                             <td class="exercise-data">3-5</td>
                             <td class="exercise-data">8-9</td>
                             <td class="exercise-data">3-5m</td>
@@ -615,10 +689,58 @@
         </div>
     </div>
     
+    <!-- RPE Guide Modal -->
+    <div id="rpe-guide-modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7);">
+        <div style="background-color: white; margin: 15% auto; padding: 20px; border-radius: 10px; width: 80%; max-width: 500px;">
+            <span style="float: right; font-size: 28px; font-weight: bold; cursor: pointer;" onclick="document.getElementById('rpe-guide-modal').style.display='none'">&times;</span>
+            <h2 style="color: #C38803;">RPE Scale Guide</h2>
+            <p>RPE (Rate of Perceived Exertion) is a scale used to measure the intensity of your exercise.</p>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                <tr style="background-color: #C38803; color: white;">
+                    <th style="padding: 8px; text-align: left; border: 1px solid #ddd;">RPE</th>
+                    <th style="padding: 8px; text-align: left; border: 1px solid #ddd;">Description</th>
+                    <th style="padding: 8px; text-align: left; border: 1px solid #ddd;">Reps in Reserve</th>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;">10</td>
+                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;">Maximum effort</td>
+                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;">0 - Could not do more reps</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;">9</td>
+                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;">Very hard effort</td>
+                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;">1 - Could do 1 more rep</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;">8</td>
+                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;">Hard effort</td>
+                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;">2 - Could do 2 more reps</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;">7</td>
+                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;">Moderate effort</td>
+                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;">3 - Could do 3 more reps</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;">6</td>
+                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;">Somewhat hard</td>
+                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;">4 - Could do 4 more reps</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;">5</td>
+                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;">Light effort</td>
+                    <td style="padding: 8px; text-align: left; border: 1px solid #ddd;">5 - Could do 5 more reps</td>
+                </tr>
+            </table>
+            <p style="margin-top: 15px;">This program primarily uses RPE 8-9 for main lifts and RPE 9 for accessory exercises.</p>
+        </div>
+    </div>
+
     <footer>
         <p>The Ultimate Push Pull Legs System - Save this page for offline use</p>
         <p>To use offline: Open in Safari, tap share icon, then "Add to Home Screen"</p>
         <p>Each phase is 6 weeks long. Complete all three phases for maximum results.</p>
+        <p><a href="#" onclick="document.getElementById('rpe-guide-modal').style.display='block'; return false;">RPE Guide</a></p>
     </footer>
     
     <script>
@@ -684,7 +806,134 @@
                 subsElement.style.display = 'block';
             }
         }
+        
+        // Save exercise set data to localStorage
+        function saveExerciseSet(event) {
+            const element = event.target;
+            const exerciseId = element.dataset.exercise;
+            const setIndex = parseInt(element.dataset.set) - 1;
+            const currentPhase = document.querySelector('.phase-content.active').id.replace('phase', '');
+            const currentWeek = document.querySelector(`#phase${currentPhase} .week-content.active`).id.split('-')[1].replace('week', '');
+            const dayElement = element.closest('.workout-day');
+            const dayHeader = dayElement.querySelector('.day-header').textContent.toLowerCase().replace(/\s+/g, '').replace('#', '');
+            
+            // Get values
+            let weight = null;
+            let completed = false;
+            
+            if (element.classList.contains('weight-input')) {
+                weight = element.value ? parseFloat(element.value) : null;
+                const checkbox = element.parentNode.querySelector('.completed-checkbox');
+                completed = checkbox ? checkbox.checked : false;
+            } else if (element.classList.contains('completed-checkbox')) {
+                const weightInput = element.parentNode.querySelector('.weight-input');
+                weight = weightInput && weightInput.value ? parseFloat(weightInput.value) : null;
+                completed = element.checked;
+            }
+            
+            // Save to localStorage
+            if (exerciseId && setIndex >= 0) {
+                workoutStorage.saveSet(
+                    currentPhase,
+                    currentWeek,
+                    dayHeader,
+                    exerciseId,
+                    setIndex,
+                    weight,
+                    null, // reps - we're not tracking this separately for now
+                    completed
+                );
+                
+                // Check if this is a personal record
+                if (weight && completed) {
+                    const isPR = workoutStorage.checkPR(exerciseId, weight, 1);
+                    if (isPR) {
+                        const weightInput = element.classList.contains('weight-input') ?
+                            element : element.parentNode.querySelector('.weight-input');
+                        if (weightInput) {
+                            weightInput.classList.add('personal-record');
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Add event listeners to all weight inputs and checkboxes
+        function setupExerciseTracking() {
+            // Add event listeners to weight inputs
+            document.querySelectorAll('.weight-input').forEach(input => {
+                input.addEventListener('change', saveExerciseSet);
+                input.addEventListener('blur', saveExerciseSet);
+            });
+            
+            // Add event listeners to completed checkboxes
+            document.querySelectorAll('.completed-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', saveExerciseSet);
+            });
+            
+            // Load saved data for the current view
+            const currentPhase = document.querySelector('.phase-content.active').id.replace('phase', '');
+            const currentWeek = document.querySelector(`#phase${currentPhase} .week-content.active`).id.split('-')[1].replace('week', '');
+            
+            document.querySelectorAll('.workout-day').forEach(day => {
+                const dayHeader = day.querySelector('.day-header').textContent.toLowerCase().replace(/\s+/g, '').replace('#', '');
+                workoutStorage.updateUI(currentPhase, currentWeek, dayHeader);
+            });
+        }
+
+        // Initialize localStorage for workout data
+        function initializeWorkoutData() {
+            if (!localStorage.getItem('pplWorkoutData')) {
+                const defaultData = {
+                    settings: {
+                        units: "lbs",
+                        darkMode: false
+                    },
+                    currentPhase: 1,
+                    currentWeek: 1,
+                    progress: {},
+                    personalRecords: {}
+                };
+                localStorage.setItem('pplWorkoutData', JSON.stringify(defaultData));
+            }
+        }
+
+        // Register service worker for PWA functionality
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    })
+                    .catch(error => {
+                        console.error('ServiceWorker registration failed: ', error);
+                    });
+            });
+        }
+
+        // Initialize app on load
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeWorkoutData();
+            setupExerciseTracking();
+            
+            // Add event listeners for phase and week changes to update UI
+            document.querySelectorAll('.phase-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Wait for the phase change to complete
+                    setTimeout(setupExerciseTracking, 100);
+                });
+            });
+            
+            document.querySelectorAll('.week-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Wait for the week change to complete
+                    setTimeout(setupExerciseTracking, 100);
+                });
+            });
+        });
     </script>
+    <script src="assets/js/workout-storage.js"></script>
+    <script src="assets/js/exercise-inputs.js"></script>
 </body>
 </html>
                         <tr class="exercise-row">

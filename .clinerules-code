@@ -49,6 +49,41 @@
 - Keep authentication simple and secure
 - Implement proper error handling for network operations
 
+## Approach Efficiency Evaluation (MANDATORY)
+
+Before implementing any significant feature or architectural change, the AI agent MUST:
+
+1. **Evaluate Alternative Approaches**
+   - Consider at least 2-3 different implementation methods
+   - Assess each approach against the project goals in the memory bank
+   - Compare complexity, performance impact, and maintainability
+
+2. **Justify Selected Approach**
+   - Explicitly explain why the chosen approach is optimal
+   - Reference specific project goals from the memory bank
+   - Document trade-offs accepted and why they're acceptable
+
+3. **Efficiency Checklist**
+   - Will this approach minimize development time while maintaining quality?
+   - Is this the simplest solution that meets all requirements?
+   - Does this approach avoid unnecessary complexity or dependencies?
+   - Is the solution scalable for future phases of the workout program?
+   - Does this approach maintain or improve mobile performance?
+
+4. **Document Evaluation in Memory Bank**
+   - Record all approaches considered
+   - Document efficiency rationale for selected approach
+   - Note any technical debt incurred with planned resolution
+
+This evaluation must be performed for:
+- Any changes to data structure
+- Introduction of new UI patterns
+- Modifications to the core navigation system
+- Changes to the localStorage implementation
+- Addition of new tracking functionality
+
+Trivial changes (styling adjustments, content additions, bug fixes) do not require formal evaluation but should still align with overall project goals.
+
 ## Memory Bank Requirements
 
 ### Format
@@ -79,6 +114,11 @@ The memory bank should be maintained as a Markdown file named `dev-memory-bank.m
    - Issues found during testing
    - Verification steps for key functionality
 
+6. **Approach Efficiency Analysis**
+   - Document efficiency evaluations for major implementation decisions
+   - Track how chosen approaches align with project goals
+   - Record any technical debt with remediation plans
+
 ### Memory Bank Update Process
 1. Update the memory bank at the end of each development session
 2. Include timestamp with each major update
@@ -97,6 +137,7 @@ When the user types "UMB" (Update Memory Bank), the agent should:
 5. Add any new implementation decisions or data structures
 6. Suggest next steps based on current progress
 7. Record any new issues or blockers encountered
+8. **Evaluate if current approach remains most efficient to reach goals**
 
 The agent should respond with a brief confirmation of the update and a summary of key points added to the memory bank.
 
@@ -107,6 +148,7 @@ Memory bank updated with:
 - Added technical notes about localStorage implementation
 - Updated next steps to focus on Pull Day 1
 - Added browser compatibility note regarding Safari input fields
+- Confirmed current approach remains most efficient for workout tracking goals
 ```
 
 ### Memory Bank Update Template
@@ -128,6 +170,12 @@ When updating the memory bank, the agent should use this template:
 - [Any new technical decisions or implementation details]
 - [Changes to data structures or architecture]
 - [Solutions to previous issues or blockers]
+
+### Approach Efficiency Assessment
+- Goals referenced: [List specific goals from memory bank]
+- Approaches considered: [Alternative approaches]
+- Selected approach: [Description with efficiency justification]
+- Alignment with goals: [How approach supports specific goals]
 
 ### Next Steps
 - [List of next tasks to complete]
@@ -155,6 +203,16 @@ When updating the memory bank, the agent should use this template:
 - Decided to use input fields of type "number" for weight tracking instead of text fields
 - Using localStorage instead of sessionStorage to ensure data persists between browser sessions
 - Implemented collapsible notes to save screen space
+
+### Approach Efficiency Assessment
+- Goals referenced: Mobile compatibility, offline functionality, user data persistence
+- Approaches considered:
+  1. Using custom number spinners with +/- buttons
+  2. Using standard HTML number inputs with styling
+  3. Using text inputs with validation
+- Selected approach: Standard HTML number inputs with custom styling
+- Efficiency justification: Provides native mobile number keyboards, built-in validation, 
+  and requires less custom code while meeting all project goals
 
 ### Next Steps
 - Complete remaining exercises for Pull Day 1
