@@ -147,3 +147,48 @@ def update_existing_files_with_links():
                     exercise['link'] = generate_exercise_link(exercise['name'])
                     needs_update = True
         
+        # If the file needs to be updated, write the changes
+        if needs_update:
+            with open(filepath, 'w') as f:
+                json.dump(data, f, indent=2)
+            updated_count += 1
+            print(f"Updated links in {filename}")
+    
+    print(f"\nUpdated links in {updated_count} existing files.")
+
+def main():
+    """Main function to generate all workout files."""
+    # Load the source data
+    with open(SOURCE_FILE, "r") as f:
+        data = json.load(f)
+    
+    # Get the number of phases and weeks per phase
+    num_phases = data["program_info"]["phases"]
+    weeks_per_phase = data["program_info"]["weeks_per_phase"]
+    
+    # Count of generated files
+    generated_count = 0
+    skipped_count = 0
+    
+    # Generate files for each phase and week
+    for phase in range(1, num_phases + 1):
+        for week in range(1, weeks_per_phase + 1):
+            # Skip files that already exist
+            filename = f"{OUTPUT_DIR}/phase{phase}-week{week}.json"
+            if os.path.exists(filename):
+                print(f"Skipping existing file: {filename}")
+                skipped_count += 1
+                continue
+            
+            # Generate the file
+            if generate_workout_file(phase, week, data):
+                generated_count += 1
+    
+    # Update existing files with links
+    update_existing_files_with_links()
+    
+    print(f"\nSummary: {generated_count} files generated, {skipped_count} files skipped.")
+    print("All workout files generated successfully!")
+
+if __name__ == "__main__":
+    main()

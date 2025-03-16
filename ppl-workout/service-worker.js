@@ -1,30 +1,37 @@
-const CACHE_NAME = 'ppl-workout-v1';
+const CACHE_NAME = 'ppl-workout-v3';
 const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/assets/icons/icon-192.png',
-  '/assets/icons/icon-512.png',
-  '/assets/icons/maskable-icon.png',
-  '/dev/exercise-data/phase1-week1.json',
-  '/dev/exercise-data/phase1-week2.json',
-  '/dev/exercise-data/phase1-week3.json',
-  '/dev/exercise-data/phase1-week4.json',
-  '/dev/exercise-data/phase1-week5.json',
-  '/dev/exercise-data/phase1-week6.json',
-  '/dev/exercise-data/phase2-week1.json',
-  '/dev/exercise-data/phase2-week2.json',
-  '/dev/exercise-data/phase2-week3.json',
-  '/dev/exercise-data/phase2-week4.json',
-  '/dev/exercise-data/phase2-week5.json',
-  '/dev/exercise-data/phase2-week6.json',
-  '/dev/exercise-data/phase3-week1.json',
-  '/dev/exercise-data/phase3-week2.json',
-  '/dev/exercise-data/phase3-week3.json',
-  '/dev/exercise-data/phase3-week4.json',
-  '/dev/exercise-data/phase3-week5.json',
-  '/dev/exercise-data/phase3-week6.json'
+  './',
+  './index.html',
+  './offline.html',
+  './manifest.json',
+  './assets/css/modern-ui.css',
+  './assets/css/weight-tracker.css',
+  './assets/js/workout-storage.js',
+  './assets/js/exercise-inputs.js',
+  './assets/js/progress-tracker.js',
+  './assets/js/network-status.js',
+  './dev/exercise-data/phase1-week1.json',
+  './dev/exercise-data/phase1-week2.json',
+  './dev/exercise-data/phase1-week3.json',
+  './dev/exercise-data/phase1-week4.json',
+  './dev/exercise-data/phase1-week5.json',
+  './dev/exercise-data/phase1-week6.json',
+  './dev/exercise-data/phase2-week1.json',
+  './dev/exercise-data/phase2-week2.json',
+  './dev/exercise-data/phase2-week3.json',
+  './dev/exercise-data/phase2-week4.json',
+  './dev/exercise-data/phase2-week5.json',
+  './dev/exercise-data/phase2-week6.json',
+  './dev/exercise-data/phase3-week1.json',
+  './dev/exercise-data/phase3-week2.json',
+  './dev/exercise-data/phase3-week3.json',
+  './dev/exercise-data/phase3-week4.json',
+  './dev/exercise-data/phase3-week5.json',
+  './dev/exercise-data/phase3-week6.json'
 ];
+
+// Offline fallback page
+const OFFLINE_PAGE = './offline.html';
 
 // Install event - cache assets
 self.addEventListener('install', (event) => {
@@ -56,40 +63,80 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch event - serve from cache or network
+// Fetch event - serve from cache, network, or offline fallback
 self.addEventListener('fetch', (event) => {
+  // Skip cross-origin requests
+  if (!event.request.url.startsWith(self.location.origin)) {
+    return;
+  }
+
+  // Handle HTML navigation requests differently (for offline fallback)
+  if (event.request.mode === 'navigate' ||
+      (event.request.method === 'GET' &&
+       event.request.headers.get('accept').includes('text/html'))) {
+    
+    event.respondWith(
+      fetch(event.request)
+        .catch(() => {
+          // If navigation fails, show offline page
+          return caches.match(OFFLINE_PAGE)
+            .then(response => {
+              if (response) {
+                return response;
+              }
+              // If offline page is not in cache, try to fetch it
+              return fetch(OFFLINE_PAGE)
+                .catch(() => {
+                  // If all else fails, return a simple offline message
+                  return new Response(
+                    '<html><body><h1>You are offline</h1><p>Please check your internet connection.</p></body></html>',
+                    { headers: { 'Content-Type': 'text/html' } }
+                  );
+                });
+            });
+        })
+    );
+    return;
+  }
+
+  // For all other requests, use a stale-while-revalidate strategy
   event.respondWith(
     caches.match(event.request)
-      .then((response) => {
-        // Cache hit - return the response from the cached version
-        if (response) {
-          return response;
-        }
-        
-        // Not in cache - fetch from network
-        return fetch(event.request)
+      .then((cachedResponse) => {
+        // Use cached version if available
+        const fetchPromise = fetch(event.request)
           .then((networkResponse) => {
             // Check if we received a valid response
-            if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
-              return networkResponse;
+            if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+              // Clone the response
+              const responseToCache = networkResponse.clone();
+              
+              // Add to cache for future use
+              caches.open(CACHE_NAME)
+                .then((cache) => {
+                  cache.put(event.request, responseToCache);
+                });
+            }
+            return networkResponse;
+          })
+          .catch((error) => {
+            console.error('Fetch failed:', error);
+            
+            // For API requests or JSON data, return a specific error
+            if (event.request.url.includes('/dev/exercise-data/')) {
+              return new Response(JSON.stringify({
+                error: 'You are offline. Some workout data may not be available.'
+              }), {
+                headers: { 'Content-Type': 'application/json' }
+              });
             }
             
-            // Clone the response
-            const responseToCache = networkResponse.clone();
-            
-            // Add to cache for future use
-            caches.open(CACHE_NAME)
-              .then((cache) => {
-                cache.put(event.request, responseToCache);
-              });
-            
-            return networkResponse;
+            // For other resources, just let the cache handle it
+            return new Response('Network request failed. Using cached version if available.');
           });
-      })
-      .catch((error) => {
-        console.error('Fetch failed:', error);
-        // You can return a custom offline page here
-        // return caches.match('/offline.html');
+
+        // Return the cached response if we have one, otherwise wait for the network response
+        return cachedResponse || fetchPromise;
       })
   );
 });
