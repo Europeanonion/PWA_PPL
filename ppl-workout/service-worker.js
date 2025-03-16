@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ppl-workout-v5';
+const CACHE_NAME = 'ppl-workout-v7';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -11,9 +11,10 @@ const ASSETS_TO_CACHE = [
   './assets/js/progress-tracker.min.js',
   './assets/js/network-status.min.js',
   './assets/js/workout-loader.min.js',
-  './assets/icons/optimized/icon-192.png',
+  './assets/icons/optimized/Icon-192.png',
   './assets/icons/optimized/icon-512.png',
   './assets/icons/optimized/maskable-icon.png',
+  './favicon.ico',
   './dev/exercise-data/phase1-week1.json',
   './dev/exercise-data/phase1-week2.json',
   './dev/exercise-data/phase1-week3.json',
