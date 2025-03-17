@@ -1,3 +1,47 @@
+#!/bin/bash
+# Script to move PWA files to root directory for Live Server access
+
+# Navigate to project root
+cd /workspaces/exceljson
+
+# Create backup directory (just in case)
+echo "Creating backup of current root files..."
+mkdir -p root_backup
+find . -maxdepth 1 -type f -not -path "*/\.*" -exec cp {} root_backup/ \;
+
+# Copy PWA files to root
+echo "Moving PWA files from ppl-workout to root..."
+cp -r ppl-workout/* .
+
+# Create dev/exercise-data directory if it doesn't exist
+mkdir -p dev/exercise-data
+
+# Copy exercise data files
+echo "Copying exercise data files..."
+cp -r ppl-workout/dev/exercise-data/* dev/exercise-data/
+
+# Update path references in index.html
+echo "Updating path references in index.html..."
+sed -i 's|href="./manifest.json"|href="manifest.json"|g' index.html
+sed -i 's|href="./assets/|href="assets/|g' index.html
+sed -i 's|src="./assets/|src="assets/|g' index.html
+sed -i 's|register("./service-worker.js")|register("service-worker.js")|g' index.html
+
+# Update path references in service-worker.js
+echo "Updating path references in service-worker.js..."
+sed -i 's|"./|"|g' service-worker.js
+sed -i 's|"index.html"|"./index.html"|g' service-worker.js
+sed -i 's|"offline.html"|"./offline.html"|g' service-worker.js
+sed -i 's|"manifest.json"|"./manifest.json"|g' service-worker.js
+
+# Update path references in manifest.json
+echo "Updating path references in manifest.json..."
+sed -i 's|"./index.html"|"index.html"|g' manifest.json
+sed -i 's|"./assets/icons/|"assets/icons/|g' manifest.json
+
+# Update workout-loader.js to use simpler paths
+echo "Updating workout-loader.js..."
+cat > assets/js/workout-loader.js << 'EOL'
 /**
  * Workout Loader Module
  * Handles loading and displaying workout data
@@ -11,24 +55,21 @@
  */
 async function fetchWorkoutData(phase, week) {
   try {
-    // Define all possible paths to try in order of preference
+    // Try multiple paths to accommodate different environments
     const paths = [
-      // Path relative to the current directory (most common case)
+      // Primary path for root deployment
+      `dev/exercise-data/phase${phase}-week${week}.json`,
+      // Alternative paths for different deployment scenarios
       `./dev/exercise-data/phase${phase}-week${week}.json`,
-      // Path relative to parent directory
-      `../dev/exercise-data/phase${phase}-week${week}.json`,
-      // Path relative to grandparent directory
-      `../../dev/exercise-data/phase${phase}-week${week}.json`,
-      // Absolute path from domain root
       `/dev/exercise-data/phase${phase}-week${week}.json`,
-      // Path with ppl-workout prefix (for GitHub Pages)
+      // Legacy paths for backward compatibility
+      `../dev/exercise-data/phase${phase}-week${week}.json`,
       `/ppl-workout/dev/exercise-data/phase${phase}-week${week}.json`,
-      // Additional paths for different deployment scenarios
       `ppl-workout/dev/exercise-data/phase${phase}-week${week}.json`,
-      `exceljson/ppl-workout/dev/exercise-data/phase${phase}-week${week}.json`,
-      `/exceljson/ppl-workout/dev/exercise-data/phase${phase}-week${week}.json`,
-      `/workspaces/exceljson/ppl-workout/dev/exercise-data/phase${phase}-week${week}.json`
+      `/workspaces/exceljson/dev/exercise-data/phase${phase}-week${week}.json`
     ];
+    
+    console.log(`Loading workout data for phase ${phase}, week ${week}`);
     
     // Try each path in sequence
     for (const path of paths) {
@@ -318,3 +359,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }, 500);
 });
+EOL
+
+# Minify the updated workout-loader.js
+echo "Minifying updated workout-loader.js..."
+if command -v uglifyjs &> /dev/null; then
+    uglifyjs assets/js/workout-loader.js -o assets/js/workout-loader.min.js
+else
+    # Simple minification if uglifyjs is not available
+    cat assets/js/workout-loader.js | tr -d '\n\t' | sed 's/  //g' > assets/js/workout-loader.min.js
+fi
+
+# Update offline.html paths
+echo "Updating offline.html paths..."
+sed -i 's|href="./manifest.json"|href="manifest.json"|g' offline.html
+sed -i 's|href="./assets/|href="assets/|g' offline.html
+sed -i 's|src="./assets/|src="assets/|g' offline.html
+
+echo "Files moved to root directory successfully!"
+echo "You can now use Live Server with the files in the root directory."
+echo "To access the app, open: http://localhost:5500/index.html"
