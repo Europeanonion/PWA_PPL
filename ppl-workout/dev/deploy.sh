@@ -53,10 +53,15 @@ git rm -rf --cached .
 # Clear the working directory except .git
 find . -not -path "./.git*" -not -path "." -delete
 
-# Copy PWA files directly to the root
+# Copy PWA files directly to the root, excluding the dev directory
 echo -e "${YELLOW}Copying PWA files to root directory...${RESET}"
-# Copy all files from the PWA directory to root
-cp -r /workspaces/exceljson/ppl-workout/* .
+mkdir -p assets css js
+cp -r /workspaces/exceljson/ppl-workout/assets .
+cp -r /workspaces/exceljson/ppl-workout/favicon.ico .
+cp -r /workspaces/exceljson/ppl-workout/index.html .
+cp -r /workspaces/exceljson/ppl-workout/manifest.json .
+cp -r /workspaces/exceljson/ppl-workout/offline.html .
+cp -r /workspaces/exceljson/ppl-workout/service-worker.js .
 
 # Create .nojekyll file to prevent Jekyll processing
 echo -e "${YELLOW}Creating .nojekyll file...${RESET}"
@@ -71,12 +76,29 @@ read -p "Do you need to adjust paths for GitHub Pages? (y/n): " ADJUST_PATHS
 if [[ $ADJUST_PATHS == "y" || $ADJUST_PATHS == "Y" ]]; then
   echo -e "${YELLOW}Adjusting paths in service-worker.js, manifest.json, and index.html...${RESET}"
   
-  # Example adjustments - these would need to be customized based on the actual files
-  # sed -i "s|'\./|'/${REPO_NAME}/|g" service-worker.js
-  # sed -i "s|\"./|\"/${REPO_NAME}/|g" manifest.json
-  # sed -i "s|src=\"./|src=\"/${REPO_NAME}/|g" index.html
+  # Perform actual path adjustments
+  sed -i "s|'\./|'/${REPO_NAME}/|g" service-worker.js
+  sed -i "s|\"./|\"/${REPO_NAME}/|g" manifest.json
+  sed -i "s|src=\"./|src=\"/${REPO_NAME}/|g" index.html
+  sed -i "s|href=\"./|href=\"/${REPO_NAME}/|g" index.html
   
-  echo -e "${RED}IMPORTANT: Manual verification of path adjustments is recommended.${RESET}"
+  # Update service worker registration in index.html
+  sed -i "s|register(\"./service-worker.js\"|register(\"/${REPO_NAME}/service-worker.js\"|g" index.html
+  
+  echo -e "${GREEN}Path adjustments completed.${RESET}"
+  echo -e "${YELLOW}Verifying path adjustments...${RESET}"
+  
+  # Check if the adjustments were made
+  echo -e "Sample paths from service-worker.js:"
+  grep -n "ASSETS_TO_CACHE" -A 5 service-worker.js
+  
+  echo -e "\nSample paths from manifest.json:"
+  grep -n "icons" -A 5 manifest.json
+  
+  echo -e "\nSample paths from index.html:"
+  grep -n "serviceWorker.register" index.html
+  
+  echo -e "${RED}IMPORTANT: Please verify the path adjustments above.${RESET}"
 fi
 
 # Commit the new files
