@@ -1,0 +1,646 @@
+{
+  "phase": 3,
+  "week": 1,
+  "description": "Phase 3 - Supercompensation (High volume, moderate intensity)",
+  "days": {
+    "push1": {
+      "title": "Push #1",
+      "exercises": [
+        {
+          "id": "low-incline-db-press",
+          "name": "Low Incline DB Press",
+          "warmup_sets": "2",
+          "working_sets": "3",
+          "reps": "20",
+          "rpe": "9",
+          "rest": "2-3m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Low%20Incline%20DB%20Press%20exercise%20form",
+          "notes": "15\u00b0 bench angle, tuck your elbows on the negative, flare as you press",
+          "substitutions": [
+            "Low Incline Machine Press",
+            "Low Incline Smith Machine Press"
+          ]
+        },
+        {
+          "id": "machine-shoulder-press",
+          "name": "Machine Shoulder Press",
+          "warmup_sets": "2",
+          "working_sets": "3",
+          "reps": "15",
+          "rpe": "9",
+          "rest": "2-3m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Machine%20Shoulder%20Press%20exercise%20form",
+          "notes": "Don't stop in between reps, keep smooth and controlled tension on the delts",
+          "substitutions": [
+            "DB Shoulder Press",
+            "Standing DB Arnold Press"
+          ]
+        },
+        {
+          "id": "cable-crossover-ladder",
+          "name": "Cable Crossover Ladder",
+          "warmup_sets": "1",
+          "working_sets": "3",
+          "reps": "20",
+          "rpe": "10",
+          "rest": "1-2m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Cable%20Crossover%20Ladder%20exercise%20form",
+          "notes": "Do one set with low cable position, one set with medium-height cable position, and one height with a high cable position",
+          "substitutions": [
+            "Flat-To-Incline DB Flye",
+            "Pec Deck"
+          ]
+        },
+        {
+          "id": "a1:-lean-in-constant-tension-db-lateral-raise",
+          "name": "A1: Lean-In Constant Tension DB Lateral Raise",
+          "warmup_sets": "1",
+          "working_sets": "3",
+          "reps": "15",
+          "rpe": "10",
+          "rest": "0m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20A1%3A%20Lean-In%20Constant%20Tension%20DB%20Lateral%20Raise%20exercise%20form",
+          "notes": "Lean into a bench and do lateral raises. Keep tension - don't rest your arm against your side at the bottom.",
+          "substitutions": [
+            "Constant-Tension Cable Lateral Raise",
+            "Constant-Tension Machine Lateral Raise"
+          ]
+        },
+        {
+          "id": "a2:-side-delt-static-stretch-30s",
+          "name": "A2: Side Delt Static Stretch (30s)",
+          "warmup_sets": "0",
+          "working_sets": "3",
+          "reps": "30s HOLD",
+          "rpe": "",
+          "rest": "0m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20A2%3A%20Side%20Delt%20Static%20Stretch%20%2830s%29%20exercise%20form",
+          "notes": "Hold a side delt stretch for 30 seconds. The stretch should be held at about a 7/10 intensity.",
+          "substitutions": []
+        },
+        {
+          "id": "overhead-triceps-extension",
+          "name": "Overhead Triceps Extension",
+          "warmup_sets": "1",
+          "working_sets": "3",
+          "reps": "20",
+          "rpe": "10",
+          "rest": "1-2m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Overhead%20Triceps%20Extension%20exercise%20form",
+          "notes": "Do both arms at once, resist the negative",
+          "substitutions": [
+            "DB Floor Skull Crusher",
+            "DB French Press"
+          ]
+        },
+        {
+          "id": "med-ball-close-grip-push-up",
+          "name": "Med-Ball Close Grip Push Up",
+          "warmup_sets": "0",
+          "working_sets": "1",
+          "reps": "AMRAP",
+          "rpe": "10",
+          "rest": "0m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Med-Ball%20Close%20Grip%20Push%20Up%20exercise%20form",
+          "notes": "Place your hands on a medicine ball and do smooth, controlled pushups",
+          "substitutions": [
+            "Close-Grip Push Up",
+            "Kneeling Modified Push Up"
+          ]
+        }
+      ]
+    },
+    "pull1": {
+      "title": "Pull #1",
+      "exercises": [
+        {
+          "id": "1-arm-half-kneeling-lat-pulldown",
+          "name": "1-Arm Half Kneeling Lat Pulldown",
+          "warmup_sets": "1",
+          "working_sets": "2",
+          "reps": "20",
+          "rpe": "9",
+          "rest": "1-2m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%201-Arm%20Half%20Kneeling%20Lat%20Pulldown%20exercise%20form",
+          "notes": "Keep chest tall, keep elbow tucked in close to your torso, focus on squeezing your lat to move the weight",
+          "substitutions": [
+            "1-Arm Lat Pull-In",
+            "Cable Lat Pullover"
+          ]
+        },
+        {
+          "id": "omni-grip-lat-pulldown",
+          "name": "Omni-Grip Lat Pulldown",
+          "warmup_sets": "1",
+          "working_sets": "3",
+          "reps": "20",
+          "rpe": "9",
+          "rest": "2-3m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Omni-Grip%20Lat%20Pulldown%20exercise%20form",
+          "notes": "One set wide grip (overhand), 1 set middle grip (overhand), 1 set close grip (underhand)",
+          "substitutions": [
+            "Omni-Grip Pull-Up",
+            "Chin-Up"
+          ]
+        },
+        {
+          "id": "machine-low-row",
+          "name": "Machine Low Row",
+          "warmup_sets": "2",
+          "working_sets": "4",
+          "reps": "20",
+          "rpe": "9",
+          "rest": "2-3m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Machine%20Low%20Row%20exercise%20form",
+          "notes": "Focus on squeezing your shoulder blades together on each rep",
+          "substitutions": [
+            "Helms Row",
+            "Incline Chest-Supported DB Row"
+          ]
+        },
+        {
+          "id": "cable-shrug-in",
+          "name": "Cable Shrug-In",
+          "warmup_sets": "1",
+          "working_sets": "3",
+          "reps": "20",
+          "rpe": "10",
+          "rest": "1-2m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Cable%20Shrug-In%20exercise%20form",
+          "notes": "Set up two cable handles low and shrug up and in. Squeeze your upper traps to move the weight.",
+          "substitutions": [
+            "DB Shrug",
+            "Plate Shrug"
+          ]
+        },
+        {
+          "id": "reverse-pec-deck",
+          "name": "Reverse Pec Deck",
+          "warmup_sets": "1",
+          "working_sets": "3",
+          "reps": "20",
+          "rpe": "10",
+          "rest": "1-2m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Reverse%20Pec%20Deck%20exercise%20form",
+          "notes": "Swing the weight \"out\", not \"back\"",
+          "substitutions": [
+            "Reverse Cable Flye",
+            "Bent-Over Reverse DB Flye"
+          ]
+        },
+        {
+          "id": "ez-bar-curl-heavy",
+          "name": "EZ-Bar Curl (Heavy)",
+          "warmup_sets": "2",
+          "working_sets": "1",
+          "reps": "4-6",
+          "rpe": "9",
+          "rest": "1-2m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20EZ-Bar%20Curl%20%28Heavy%29%20exercise%20form",
+          "notes": "Arc the bar \"out\" not \"up\", focus on squeezing your biceps",
+          "substitutions": [
+            "DB Curl",
+            "Cable Curl"
+          ]
+        },
+        {
+          "id": "a1:-ez-bar-modified-bicep-21's",
+          "name": "A1: EZ-Bar Modified Bicep 21's",
+          "warmup_sets": "0",
+          "working_sets": "2",
+          "reps": "21",
+          "rpe": "10",
+          "rest": "0m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20A1%3A%20EZ-Bar%20Modified%20Bicep%2021%27s%20exercise%20form",
+          "notes": "7 reps seated, 7 reps standing full ROM, 7 reps bottom-half curls",
+          "substitutions": [
+            "DB Curl 21's",
+            "Cable Curl 21's"
+          ]
+        },
+        {
+          "id": "a2:-bicep-static-stretch-30s",
+          "name": "A2: Bicep Static Stretch (30s)",
+          "warmup_sets": "0",
+          "working_sets": "2",
+          "reps": "30s HOLD",
+          "rpe": "",
+          "rest": "0m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20A2%3A%20Bicep%20Static%20Stretch%20%2830s%29%20exercise%20form",
+          "notes": "Hold a bicep stretch for 30 seconds. The stretch should be held at about a 7/10 intensity.",
+          "substitutions": []
+        }
+      ]
+    },
+    "legs1": {
+      "title": "Legs #1",
+      "exercises": [
+        {
+          "id": "front-squat",
+          "name": "Front Squat",
+          "warmup_sets": "2",
+          "working_sets": "3",
+          "reps": "15",
+          "rpe": "8-9",
+          "rest": "2-3m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Front%20Squat%20exercise%20form",
+          "notes": "These will be challenging, let's push! Don't go so heavy that you miss reps. Be humble with your weight and focus on keeping your torso upright",
+          "substitutions": [
+            "High-Bar Box Squat",
+            "Goblet Squat"
+          ]
+        },
+        {
+          "id": "dumbbell-rdl",
+          "name": "Dumbbell RDL",
+          "warmup_sets": "1",
+          "working_sets": "3",
+          "reps": "20",
+          "rpe": "9",
+          "rest": "2-3m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Dumbbell%20RDL%20exercise%20form",
+          "notes": "Emphasize the stretch in your hamstrings, prevent your lower back from rounding",
+          "substitutions": [
+            "Barbell RDL",
+            "45\u00b0 Hyperextension"
+          ]
+        },
+        {
+          "id": "walking-lunge",
+          "name": "Walking Lunge",
+          "warmup_sets": "1",
+          "working_sets": "3",
+          "reps": "10",
+          "rpe": "9",
+          "rest": "2-3m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Walking%20Lunge%20exercise%20form",
+          "notes": "Take medium strides, minimize the amount you push off your rear leg",
+          "substitutions": [
+            "DB Step-Up",
+            "Goblet Squat"
+          ]
+        },
+        {
+          "id": "slow-seated-leg-curl-3-up-3-down",
+          "name": "Slow Seated Leg Curl (3 up, 3 down)",
+          "warmup_sets": "1",
+          "working_sets": "3",
+          "reps": "8",
+          "rpe": "10",
+          "rest": "1-2m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Slow%20Seated%20Leg%20Curl%20%283%20up%2C%203%20down%29%20exercise%20form",
+          "notes": "Lift with a slow tempo. The positive should take 3 seconds and the negative should take 3 seconds.",
+          "substitutions": [
+            "Lying Leg Curl",
+            "Nordic Ham Curl"
+          ]
+        },
+        {
+          "id": "leg-press-toe-press",
+          "name": "Leg Press Toe Press",
+          "warmup_sets": "1",
+          "working_sets": "3",
+          "reps": "20",
+          "rpe": "10",
+          "rest": "1-2m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Leg%20Press%20Toe%20Press%20exercise%20form",
+          "notes": "Press all the way up to your toes, stretch your calves at the bottom, don't bounce",
+          "substitutions": [
+            "Seated Calf Raise",
+            "Standing Calf Raise"
+          ]
+        },
+        {
+          "id": "llpt-plank",
+          "name": "LLPT Plank",
+          "warmup_sets": "0",
+          "working_sets": "2",
+          "reps": "30s",
+          "rpe": "10",
+          "rest": "1-2m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20LLPT%20Plank%20exercise%20form",
+          "notes": "Contract your glutes and position your elbows under your eyes to make the plank more difficult",
+          "substitutions": [
+            "Ab Wheel Rollout",
+            "Plank"
+          ]
+        }
+      ]
+    },
+    "push2": {
+      "title": "Push #2",
+      "exercises": [
+        {
+          "id": "bench-press-top-set",
+          "name": "Bench Press (Top Set)",
+          "warmup_sets": "2",
+          "working_sets": "1",
+          "reps": "2-4",
+          "rpe": "8-9",
+          "rest": "3-4m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Bench%20Press%20%28Top%20Set%29%20exercise%20form",
+          "notes": "Set up a comfortable arch, quick pause on the chest and explode up on each rep",
+          "substitutions": [
+            "DB Bench Press",
+            "Machine Chest Press"
+          ]
+        },
+        {
+          "id": "bench-press-back-off-amrap",
+          "name": "Bench Press (Back Off AMRAP)",
+          "warmup_sets": "0",
+          "working_sets": "1",
+          "reps": "AMRAP",
+          "rpe": "10",
+          "rest": "3-4m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Bench%20Press%20%28Back%20Off%20AMRAP%29%20exercise%20form",
+          "notes": "Use ~60% of the weight you used on your top set and do it for as many reps as possible. You should be in the range of 10-20+ reps on this set! Use a spotter and safety bars!",
+          "substitutions": [
+            "DB Bench Press",
+            "Machine Chest Press"
+          ]
+        },
+        {
+          "id": "standing-dumbbell-arnold-press",
+          "name": "Standing Dumbbell Arnold Press",
+          "warmup_sets": "2",
+          "working_sets": "3",
+          "reps": "15",
+          "rpe": "9",
+          "rest": "2-3m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Standing%20Dumbbell%20Arnold%20Press%20exercise%20form",
+          "notes": "Start with your elbows in front of you and palms facing in. Rotate the dumbbells so that your palms face forward as you press.",
+          "substitutions": [
+            "Seated DB Shoulder Press",
+            "Machine Shoulder Press"
+          ]
+        },
+        {
+          "id": "weighted-dip",
+          "name": "Weighted Dip",
+          "warmup_sets": "1",
+          "working_sets": "3",
+          "reps": "15-20",
+          "rpe": "10",
+          "rest": "2-3m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Weighted%20Dip%20exercise%20form",
+          "notes": "Tuck your elbows at 45\u00b0, lean your torso forward 15\u00b0, shoulder width or slightly wider grip",
+          "substitutions": [
+            "Machine Chest Press",
+            "DB Bench Press"
+          ]
+        },
+        {
+          "id": "machine-lateral-raise-+-myoreps",
+          "name": "Machine Lateral Raise (+ Myoreps)",
+          "warmup_sets": "1",
+          "working_sets": "3",
+          "reps": "12-15",
+          "rpe": "10",
+          "rest": "1-2m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Machine%20Lateral%20Raise%20%28%2B%20Myoreps%29%20exercise%20form",
+          "notes": "On the last set only, perform myoreps: After reaching failure at 12-15 reps, pause for ~5 seconds and do another 4 reps. Then pause for ~5 seconds again and do another 4 reps. Repeat until you can't complete 4 reps.",
+          "substitutions": [
+            "DB Lateral Raise (+ Myoreps)",
+            "Cable Lateral Raise (+ Myoreps)"
+          ]
+        },
+        {
+          "id": "triceps-pressdown",
+          "name": "Triceps Pressdown",
+          "warmup_sets": "1",
+          "working_sets": "3",
+          "reps": "20",
+          "rpe": "10",
+          "rest": "1-2m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Triceps%20Pressdown%20exercise%20form",
+          "notes": "Focus on squeezing your triceps to move the weight",
+          "substitutions": [
+            "Cable Triceps Kickback",
+            "DB Triceps Kickback"
+          ]
+        },
+        {
+          "id": "1-arm-bottom-half-overhead-cable-tricep-extensions",
+          "name": "1-Arm Bottom-Half Overhead Cable Tricep Extensions",
+          "warmup_sets": "0",
+          "working_sets": "3",
+          "reps": "20-30",
+          "rpe": "10",
+          "rest": "1-2m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%201-Arm%20Bottom-Half%20Overhead%20Cable%20Tricep%20Extensions%20exercise%20form",
+          "notes": "Do overhead cable tricep extensions, but cut out the top half of the ROM (stay entirely in the stretched aspect of the lift)",
+          "substitutions": [
+            "DB Bottom-Half Skull Crusher",
+            "EZ Bar Bottom-Half Skull Crusher"
+          ]
+        }
+      ]
+    },
+    "pull2": {
+      "title": "Pull #2",
+      "exercises": [
+        {
+          "id": "pull-up",
+          "name": "Pull-Up",
+          "warmup_sets": "2",
+          "working_sets": "6",
+          "reps": "3",
+          "rpe": "8-9",
+          "rest": "15 sec",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Pull-Up%20exercise%20form",
+          "notes": "6 cluster sets: 3 reps, rest 15s, repeat 6x. Keep form smooth and controlled.",
+          "substitutions": [
+            "Lat Pulldown",
+            "Machine Pulldown"
+          ]
+        },
+        {
+          "id": "wide-grip-cable-row",
+          "name": "Wide-Grip Cable Row",
+          "warmup_sets": "2",
+          "working_sets": "10",
+          "reps": "3",
+          "rpe": "8-9",
+          "rest": "15 sec",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Wide-Grip%20Cable%20Row%20exercise%20form",
+          "notes": "10 cluster sets: 3 reps, rest 15s, repeat 10x. Keep form tight.",
+          "substitutions": [
+            "Wide-Grip Machine Row",
+            "Wide-Grip T-Bar Row"
+          ]
+        },
+        {
+          "id": "slow-barbell-row-3-up-3-down",
+          "name": "SLOW Barbell Row (3 up, 3 down)",
+          "warmup_sets": "1",
+          "working_sets": "3",
+          "reps": "6",
+          "rpe": "8-9",
+          "rest": "2-3m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20SLOW%20Barbell%20Row%20%283%20up%2C%203%20down%29%20exercise%20form",
+          "notes": "Use a 3 second positive and a 3 second negative. \"Feel\" your back working, be humble with the weight you use",
+          "substitutions": [
+            "SLOW DB Row",
+            "SLOW Machine Row"
+          ]
+        },
+        {
+          "id": "bayesian-cable-curl",
+          "name": "Bayesian Cable Curl",
+          "warmup_sets": "1",
+          "working_sets": "3",
+          "reps": "20",
+          "rpe": "10",
+          "rest": "1-2m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Bayesian%20Cable%20Curl%20exercise%20form",
+          "notes": "Keep your elbow behind your torso throughout the range of motion, focus on squeezing your bicep. Sets are per arm",
+          "substitutions": [
+            "DB Incline Curl",
+            "DB Curl"
+          ]
+        },
+        {
+          "id": "bottom-half-preacher-curl",
+          "name": "Bottom-Half Preacher Curl",
+          "warmup_sets": "0",
+          "working_sets": "3",
+          "reps": "15",
+          "rpe": "10",
+          "rest": "1-2m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Bottom-Half%20Preacher%20Curl%20exercise%20form",
+          "notes": "Do preacher curls, but cut out the top half of the ROM (stay entirely in the stretched aspect of the lift)",
+          "substitutions": [
+            "Bottom-Half Spider Curl",
+            "Bottom-Half Bayesian Curl"
+          ]
+        },
+        {
+          "id": "rope-facepull",
+          "name": "Rope Facepull",
+          "warmup_sets": "1",
+          "working_sets": "3",
+          "reps": "20",
+          "rpe": "10",
+          "rest": "1-2m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Rope%20Facepull%20exercise%20form",
+          "notes": "Pull your elbows up and out, squeeze your shoulder blades together",
+          "substitutions": [
+            "Reverse Pec Deck",
+            "Bent-Over Reverse DB Flye"
+          ]
+        }
+      ]
+    },
+    "legs2": {
+      "title": "Legs #2",
+      "exercises": [
+        {
+          "id": "deadlift",
+          "name": "Deadlift",
+          "warmup_sets": "2",
+          "working_sets": "1",
+          "reps": "4",
+          "rpe": "8-9",
+          "rest": "3-5m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Deadlift%20exercise%20form",
+          "notes": "Brace your lats, chest tall, pull the slack out of the bar before lifting",
+          "substitutions": [
+            "Trap Bar Deadlift",
+            "Barbell Hip Thrust"
+          ]
+        },
+        {
+          "id": "stiff-leg-deadlift",
+          "name": "Stiff-Leg Deadlift",
+          "warmup_sets": "0",
+          "working_sets": "2",
+          "reps": "8",
+          "rpe": "7",
+          "rest": "3-4m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Stiff-Leg%20Deadlift%20exercise%20form",
+          "notes": "Think about doing a high-hip conventional deadlift with a slight bend in the knees",
+          "substitutions": [
+            "Barbell RDL",
+            "DB RDL"
+          ]
+        },
+        {
+          "id": "leg-press",
+          "name": "Leg Press",
+          "warmup_sets": "2",
+          "working_sets": "2",
+          "reps": "10-12",
+          "rpe": "7",
+          "rest": "2-3m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Leg%20Press%20exercise%20form",
+          "notes": "Medium width feet placement on the platform, don't allow your lower back to round",
+          "substitutions": [
+            "Goblet Squat",
+            "Walking Lunge"
+          ]
+        },
+        {
+          "id": "glute-ham-raise",
+          "name": "Glute Ham Raise",
+          "warmup_sets": "1",
+          "working_sets": "2",
+          "reps": "8-10",
+          "rpe": "8",
+          "rest": "1-2m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Glute%20Ham%20Raise%20exercise%20form",
+          "notes": "Keep your hips straight, do Nordic ham curls if no GHR machine",
+          "substitutions": [
+            "Nordic Ham Curl",
+            "Lying Leg Curl"
+          ]
+        },
+        {
+          "id": "slow-eccentric-leg-extension",
+          "name": "Slow-Eccentric Leg Extension",
+          "warmup_sets": "1",
+          "working_sets": "2",
+          "reps": "8-10",
+          "rpe": "8",
+          "rest": "1-2m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Slow-Eccentric%20Leg%20Extension%20exercise%20form",
+          "notes": "Control the weight with a 3-4 second negative",
+          "substitutions": [
+            "DB Step-Up",
+            "Goblet Squat"
+          ]
+        },
+        {
+          "id": "seated-calf-raise",
+          "name": "Seated Calf Raise",
+          "warmup_sets": "1",
+          "working_sets": "2",
+          "reps": "15-20",
+          "rpe": "8",
+          "rest": "1-2m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Seated%20Calf%20Raise%20exercise%20form",
+          "notes": "Press all the way up to your toes, stretch your calves at the bottom, don't bounce",
+          "substitutions": [
+            "Standing Calf Raise",
+            "Leg Press Toe Press"
+          ]
+        },
+        {
+          "id": "roman-chair-leg-raise",
+          "name": "Roman Chair Leg Raise",
+          "warmup_sets": "1",
+          "working_sets": "2",
+          "reps": "10-20",
+          "rpe": "8",
+          "rest": "1-2m",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Roman%20Chair%20Leg%20Raise%20exercise%20form",
+          "notes": "Don't swing your legs at the bottom, minimize momentum, tuck your knees towards your chest if lifting your legs straight out is too challenging",
+          "substitutions": [
+            "Hanging Leg Raise",
+            "Reverse Crunch"
+          ]
+        }
+      ]
+    }
+  }
+}

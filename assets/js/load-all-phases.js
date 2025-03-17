@@ -1,0 +1,62 @@
+/**
+ * Load All Phases Script
+ * This script loads workout data for all phases and weeks
+ */
+
+// Define the correct number of weeks per phase
+const weeksPerPhase = {
+  1: 6, // Phase 1: weeks 1-6
+  2: 4, // Phase 2: weeks 1-4
+  3: 3  // Phase 3: weeks 1-3
+};
+
+// Function to check if workoutLoader is available
+function checkWorkoutLoader() {
+  if (window.workoutLoader && typeof window.workoutLoader.loadData === 'function') {
+    console.log('WorkoutLoader found, loading all phases and weeks...');
+    
+    // Load data for all phases
+    Object.keys(weeksPerPhase).forEach(phase => {
+      const phaseNum = parseInt(phase);
+      
+      // Load data for all weeks in this phase
+      for (let week = 1; week <= weeksPerPhase[phase]; week++) {
+        console.log(`Pre-loading Phase ${phaseNum}, Week ${week} data...`);
+        try {
+          window.workoutLoader.loadData(phaseNum, week);
+        } catch (error) {
+          console.error(`Error loading Phase ${phaseNum}, Week ${week}:`, error);
+        }
+      }
+    });
+    
+    console.log('All phases and weeks pre-loaded');
+    return true;
+  }
+  
+  return false;
+}
+
+// Try to load data when the DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOM loaded, checking for workoutLoader...');
+  
+  // First attempt
+  if (!checkWorkoutLoader()) {
+    console.log('WorkoutLoader not available yet, will retry...');
+    
+    // Retry after a delay
+    setTimeout(() => {
+      if (!checkWorkoutLoader()) {
+        console.log('WorkoutLoader still not available, will retry once more...');
+        
+        // Final retry
+        setTimeout(() => {
+          if (!checkWorkoutLoader()) {
+            console.error('WorkoutLoader not available after multiple attempts');
+          }
+        }, 2000);
+      }
+    }, 1000);
+  }
+});
