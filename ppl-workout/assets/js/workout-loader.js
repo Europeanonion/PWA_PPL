@@ -1,19 +1,26 @@
 /**
  * Workout Loader Module
- * Dynamically loads workout data from JSON files and creates workout day sections
+ * Handles loading and displaying workout data
  */
 
 /**
- * Fetch workout data from a JSON file
+ * Fetch workout data for a specific phase and week
  * @param {number} phase - The phase number
  * @param {number} week - The week number
- * @returns {Promise<Object>} - The workout data
+ * @returns {Promise<Object>} The workout data
  */
 async function fetchWorkoutData(phase, week) {
   try {
-    const response = await fetch(`./dev/exercise-data/phase${phase}-week${week}.json`);
+    // Use relative path from the current location to the dev directory
+    const response = await fetch(`../../dev/exercise-data/phase${phase}-week${week}.json`);
     if (!response.ok) {
-      throw new Error(`Failed to fetch workout data: ${response.status} ${response.statusText}`);
+      console.warn(`Failed to fetch workout data: ${response.status} ${response.statusText}`);
+      // Try alternative path as a fallback
+      const altResponse = await fetch(`/ppl-workout/dev/exercise-data/phase${phase}-week${week}.json`);
+      if (!altResponse.ok) {
+        throw new Error(`Failed to fetch workout data with all path strategies`);
+      }
+      return await altResponse.json();
     }
     return await response.json();
   } catch (error) {
@@ -24,146 +31,162 @@ async function fetchWorkoutData(phase, week) {
 
 /**
  * Create a workout day section
- * @param {string} dayId - The day ID (e.g., 'push1', 'pull1', 'legs1')
- * @param {Object} dayData - The workout day data
- * @returns {HTMLElement} - The workout day section
+ * @param {string} dayId - The day ID (e.g., 'push1')
+ * @param {Object} dayData - The day data
+ * @returns {HTMLElement} The workout day section
  */
 function createWorkoutDaySection(dayId, dayData) {
-  // Create the article element
-  const article = document.createElement('article');
-  article.className = 'workout-day';
+  const section = document.createElement('section');
+  section.className = 'workout-day';
+  section.id = dayId;
   
-  // Create the header
-  const header = document.createElement('header');
+  // Create day header
+  const header = document.createElement('h3');
   header.className = 'day-header';
   header.textContent = dayData.title;
-  article.appendChild(header);
+  section.appendChild(header);
   
-  // Create the progress indicator
-  const progressIndicator = document.createElement('div');
-  progressIndicator.className = 'progress-indicator';
-  progressIndicator.innerHTML = `
-    <div>
-      <span>Workout Progress</span>
-      <div class="progress-bar">
-        <div class="progress-bar-fill" style="width: 0%"></div>
-      </div>
-      <div class="progress-stats">
-        <span>0/${dayData.exercises.length} exercises completed</span>
-        <span>0%</span>
-      </div>
-    </div>
-  `;
-  article.appendChild(progressIndicator);
-  
-  // Create the exercise table
+  // Create exercise table
   const table = document.createElement('table');
   table.className = 'exercise-table';
   
-  // Create the table header
+  // Create table header
   const thead = document.createElement('thead');
-  thead.innerHTML = `
-    <tr>
-      <th class="table-header" style="width: 35%;">Exercise</th>
-      <th class="table-header" style="width: 15%;">Warm-up</th>
-      <th class="table-header" style="width: 15%;">Working</th>
-      <th class="table-header" style="width: 15%;">Reps</th>
-      <th class="table-header" style="width: 10%;">RPE</th>
-      <th class="table-header" style="width: 10%;">Rest</th>
-    </tr>
-  `;
+  const headerRow = document.createElement('tr');
+  
+  const headers = ['Exercise', 'Sets', 'Working Sets', 'Reps', 'RPE', 'Rest'];
+  headers.forEach(text => {
+    const th = document.createElement('th');
+    th.textContent = text;
+    headerRow.appendChild(th);
+  });
+  
+  thead.appendChild(headerRow);
   table.appendChild(thead);
   
-  // Create the table body
+  // Create table body
   const tbody = document.createElement('tbody');
   
   // Add exercises
-  dayData.exercises.forEach(exercise => {
-    // Create exercise row
-    const exerciseRow = document.createElement('tr');
-    exerciseRow.className = 'exercise-row';
-    
-    // Exercise name cell
-    const nameCell = document.createElement('td');
-    nameCell.className = 'exercise-name';
-    nameCell.innerHTML = `
-      <a href="${exercise.link}" class="exercise-link" target="_blank" rel="noopener">${exercise.name}</a>
-      <span class="info-icon" onclick="toggleNotes('${exercise.id}-notes')">i</span>
-    `;
-    exerciseRow.appendChild(nameCell);
-    
-    // Warm-up sets cell
-    const warmupCell = document.createElement('td');
-    warmupCell.className = 'exercise-data';
-    warmupCell.textContent = exercise.warmup_sets;
-    exerciseRow.appendChild(warmupCell);
-    
-    // Working sets cell
-    const workingCell = document.createElement('td');
-    workingCell.className = 'exercise-data';
-    workingCell.textContent = exercise.working_sets;
-    exerciseRow.appendChild(workingCell);
-    
-    // Reps cell
-    const repsCell = document.createElement('td');
-    repsCell.className = 'exercise-data';
-    repsCell.textContent = exercise.reps;
-    exerciseRow.appendChild(repsCell);
-    
-    // RPE cell
-    const rpeCell = document.createElement('td');
-    rpeCell.className = 'exercise-data';
-    rpeCell.textContent = exercise.rpe;
-    exerciseRow.appendChild(rpeCell);
-    
-    // Rest cell
-    const restCell = document.createElement('td');
-    restCell.className = 'exercise-data';
-    restCell.textContent = exercise.rest;
-    exerciseRow.appendChild(restCell);
-    
-    // Add exercise row to table
-    tbody.appendChild(exerciseRow);
-    
-    // Create notes row
-    const notesRow = document.createElement('tr');
-    notesRow.id = `${exercise.id}-notes`;
-    notesRow.className = 'exercise-notes';
-    
-    // Notes cell
-    const notesCell = document.createElement('td');
-    notesCell.colSpan = 6;
-    
-    // Notes content
-    let notesContent = `<strong>Notes:</strong> ${exercise.notes}`;
-    
-    // Add substitutions if available
-    if (exercise.substitutions && exercise.substitutions.length > 0) {
-      notesContent += `
-        <br><br>
-        <button class="sub-btn" onclick="toggleSubs('${exercise.id}-subs')">Show Substitutions</button>
-        <div id="${exercise.id}-subs" class="substitutions">
-          <strong>Substitution Options:</strong>
-      `;
+  if (dayData.exercises && dayData.exercises.length > 0) {
+    dayData.exercises.forEach(exercise => {
+      // Create exercise row
+      const exerciseRow = document.createElement('tr');
+      exerciseRow.className = 'exercise-row';
+      exerciseRow.id = `${exercise.id}-row`;
       
-      exercise.substitutions.forEach((sub, index) => {
-        notesContent += `<br>${index + 1}. ${sub}`;
-      });
+      // Exercise name cell with info icon
+      const nameCell = document.createElement('td');
+      nameCell.className = 'exercise-name';
       
-      notesContent += '</div>';
-    }
-    
-    notesCell.innerHTML = notesContent;
-    notesRow.appendChild(notesCell);
-    
-    // Add notes row to table
-    tbody.appendChild(notesRow);
-  });
+      const nameSpan = document.createElement('span');
+      nameSpan.textContent = exercise.name;
+      nameCell.appendChild(nameSpan);
+      
+      const infoIcon = document.createElement('span');
+      infoIcon.className = 'info-icon';
+      infoIcon.innerHTML = 'ⓘ';
+      infoIcon.setAttribute('onclick', `toggleNotes('${exercise.id}-notes')`);
+      nameCell.appendChild(infoIcon);
+      
+      // Sets cell
+      const setsCell = document.createElement('td');
+      setsCell.className = 'exercise-data';
+      setsCell.textContent = exercise.warmup_sets;
+      
+      // Working sets cell
+      const workingSetsCell = document.createElement('td');
+      workingSetsCell.className = 'exercise-data';
+      workingSetsCell.textContent = exercise.working_sets;
+      
+      // Reps cell
+      const repsCell = document.createElement('td');
+      repsCell.className = 'exercise-data';
+      repsCell.textContent = exercise.reps;
+      
+      // RPE cell
+      const rpeCell = document.createElement('td');
+      rpeCell.className = 'exercise-data';
+      rpeCell.textContent = exercise.rpe;
+      
+      // Rest cell
+      const restCell = document.createElement('td');
+      restCell.className = 'exercise-data';
+      restCell.textContent = exercise.rest;
+      
+      // Add cells to row
+      exerciseRow.appendChild(nameCell);
+      exerciseRow.appendChild(setsCell);
+      exerciseRow.appendChild(workingSetsCell);
+      exerciseRow.appendChild(repsCell);
+      exerciseRow.appendChild(rpeCell);
+      exerciseRow.appendChild(restCell);
+      
+      // Add row to table
+      tbody.appendChild(exerciseRow);
+      
+      // Create notes row
+      const notesRow = document.createElement('tr');
+      notesRow.className = 'notes-row';
+      notesRow.id = `${exercise.id}-notes`;
+      notesRow.style.display = 'none';
+      
+      const notesCell = document.createElement('td');
+      notesCell.colSpan = 6;
+      
+      // Notes content
+      const notesContent = document.createElement('div');
+      notesContent.className = 'notes-content';
+      
+      // Notes text
+      const notesText = document.createElement('p');
+      notesText.textContent = exercise.notes;
+      notesContent.appendChild(notesText);
+      
+      // Video link
+      if (exercise.link) {
+        const videoLink = document.createElement('a');
+        videoLink.href = exercise.link;
+        videoLink.textContent = 'Watch Video';
+        videoLink.target = '_blank';
+        videoLink.rel = 'noopener';
+        notesContent.appendChild(videoLink);
+      }
+      
+      // Substitutions
+      if (exercise.substitutions && exercise.substitutions.length > 0) {
+        const subsTitle = document.createElement('p');
+        subsTitle.className = 'subs-title';
+        subsTitle.textContent = 'Substitutions:';
+        subsTitle.innerHTML += ` <span class="toggle-subs" onclick="toggleSubs('${exercise.id}-subs')">Show</span>`;
+        notesContent.appendChild(subsTitle);
+        
+        const subsList = document.createElement('ul');
+        subsList.className = 'subs-list';
+        subsList.id = `${exercise.id}-subs`;
+        subsList.style.display = 'none';
+        
+        exercise.substitutions.forEach(sub => {
+          const subItem = document.createElement('li');
+          subItem.textContent = sub;
+          subsList.appendChild(subItem);
+        });
+        
+        notesContent.appendChild(subsList);
+      }
+      
+      notesCell.appendChild(notesContent);
+      notesRow.appendChild(notesCell);
+      
+      // Add notes row to table
+      tbody.appendChild(notesRow);
+    });
+  }
   
   table.appendChild(tbody);
-  article.appendChild(table);
+  section.appendChild(table);
   
-  return article;
+  return section;
 }
 
 /**
@@ -172,102 +195,83 @@ function createWorkoutDaySection(dayId, dayData) {
  * @param {number} week - The week number
  */
 async function loadWorkoutData(phase, week) {
-  console.log(`Loading workout data for Phase ${phase}, Week ${week}...`);
-  
-  // Get the week content container
-  const weekContent = document.getElementById(`phase${phase}-week${week}`);
-  if (!weekContent) {
-    console.error(`Week content container not found for Phase ${phase}, Week ${week}`);
+  // Get the content container - Fix: match the actual DOM structure
+  const contentContainer = document.querySelector(`#phase${phase}-week${week}`);
+  if (!contentContainer) {
+    console.error(`Content container not found for Phase ${phase}, Week ${week}`);
     return;
   }
   
   // Clear existing content
-  weekContent.innerHTML = '';
+  contentContainer.innerHTML = '';
   
   // Fetch workout data
   const workoutData = await fetchWorkoutData(phase, week);
   if (!workoutData) {
     console.error(`Failed to load workout data for Phase ${phase}, Week ${week}`);
-    weekContent.innerHTML = `<p style="padding: 20px; text-align: center;">Failed to load workout data for Phase ${phase}, Week ${week}. Please try again later.</p>`;
+    contentContainer.innerHTML = '<p class="error-message">Failed to load workout data. Please try again later.</p>';
     return;
   }
   
   // Create workout day sections
-  for (const dayId in workoutData.days) {
-    const dayData = workoutData.days[dayId];
-    const daySection = createWorkoutDaySection(dayId, dayData);
-    weekContent.appendChild(daySection);
+  if (workoutData.days) {
+    Object.entries(workoutData.days).forEach(([dayId, dayData]) => {
+      const daySection = createWorkoutDaySection(dayId, dayData);
+      contentContainer.appendChild(daySection);
+    });
   }
   
-  // Generate exercise inputs
+  // Generate exercise inputs after a delay
   if (window.generateExerciseInputs) {
-    setTimeout(window.generateExerciseInputs, 100);
+    setTimeout(window.generateExerciseInputs, 300);
   }
   
-  // Update progress indicators
+  // Update progress indicators after an additional delay
   if (window.updateWorkoutProgress) {
-    setTimeout(window.updateWorkoutProgress, 200);
+    setTimeout(window.updateWorkoutProgress, 400);
   }
   
   console.log(`Workout data loaded for Phase ${phase}, Week ${week}`);
 }
 
 /**
- * Initialize workout loader
+ * Check if the workout loader is available
+ * @returns {boolean} Whether the workout loader is available
  */
-function initWorkoutLoader() {
-  console.log('Initializing workout loader...');
+function checkWorkoutLoader() {
+  if (window.loadWorkoutData) {
+    return true;
+  }
   
-  // Load initial workout data (Phase 1, Week 1)
-  loadWorkoutData(1, 1);
+  // Make functions globally available
+  window.loadWorkoutData = loadWorkoutData;
+  window.fetchWorkoutData = fetchWorkoutData;
+  window.createWorkoutDaySection = createWorkoutDaySection;
   
-  // Add event listeners for phase and week changes
-  document.querySelectorAll('.phase-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      const phaseId = this.getAttribute('onclick').match(/showPhase\('(.+?)'\)/)[1];
-      const phase = parseInt(phaseId.replace('phase', ''));
-      
-      // Wait for the phase change to complete
-      setTimeout(() => {
-        // Find the active week in this phase
-        const activeWeek = document.querySelector(`#${phaseId} .week-content.active`);
-        if (activeWeek) {
-          const week = parseInt(activeWeek.id.split('-')[1].replace('week', ''));
-          loadWorkoutData(phase, week);
-        }
-      }, 100);
-    });
-  });
-  
-  document.querySelectorAll('.week-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      const onclick = this.getAttribute('onclick');
-      const match = onclick.match(/showWeek\('(.+?)', '(.+?)'\)/);
-      if (match) {
-        const phaseId = match[1];
-        const weekId = match[2];
-        const phase = parseInt(phaseId.replace('phase', ''));
-        const week = parseInt(weekId.replace('week', ''));
-        
-        // Wait for the week change to complete
-        setTimeout(() => {
-          loadWorkoutData(phase, week);
-        }, 100);
-      }
-    });
-  });
-  
-  console.log('Workout loader initialized');
+  console.log('WorkoutLoader initialized');
+  return true;
 }
 
-// Make functions available globally
-window.workoutLoader = {
-  init: initWorkoutLoader,
-  loadData: loadWorkoutData
-};
-
-// Initialize when the DOM is loaded
+// Initialize on DOM load
 document.addEventListener('DOMContentLoaded', function() {
-  // Initialize workout loader
-  initWorkoutLoader();
+  console.log('DOM loaded, checking for workoutLoader...');
+  
+  // First attempt with longer delays
+  setTimeout(() => {
+    if (!checkWorkoutLoader()) {
+      console.log('WorkoutLoader not available yet, will retry...');
+      
+      setTimeout(() => {
+        if (!checkWorkoutLoader()) {
+          console.log('WorkoutLoader still not available, final retry...');
+          
+          setTimeout(() => {
+            if (!checkWorkoutLoader()) {
+              console.error('WorkoutLoader not available after multiple attempts');
+            }
+          }, 2000);
+        }
+      }, 1500);
+    }
+  }, 500);
 });

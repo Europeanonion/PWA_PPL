@@ -1,7 +1,7 @@
 {
-  "phase": 1,
-  "week": 3,
-  "description": "Phase 1 - Base Hypertrophy (Moderate Volume, Moderate Intensity)",
+  "phase": 2,
+  "week": 4,
+  "description": "Phase 2 - Maximum Effort (Low volume, high intensity)",
   "days": {
     "legs2": {
       "title": "Legs #2",
@@ -110,7 +110,7 @@
           "rpe": "10",
           "rest": "3-4m",
           "link": "https://www.youtube.com/results?search_query=how%20to%20do%20High-Incline%20Smith%20Machine%20Press%20exercise%20form",
-          "notes": "Set the bench at a 45-60\u00b0 incline, touch the bar to your upper chest with control",
+          "notes": "Set the bench at a 45-60 degree incline, touch the bar to your upper chest with control",
           "substitutions": [
             "Incline DB Press",
             "Incline Machine Press"

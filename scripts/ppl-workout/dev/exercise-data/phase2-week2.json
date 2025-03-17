@@ -1,24 +1,24 @@
 {
-  "phase": 1,
-  "week": 3,
-  "description": "Phase 1 - Base Hypertrophy (Moderate Volume, Moderate Intensity)",
+  "phase": 2,
+  "week": 2,
+  "description": "Phase 2 - Maximum Effort (Low volume, high intensity)",
   "days": {
     "legs2": {
       "title": "Legs #2",
       "exercises": [
         {
-          "id": "deadlift",
-          "name": "Deadlift",
+          "id": "hack-squat",
+          "name": "Hack Squat",
           "warmup_sets": "2",
           "working_sets": "2",
           "reps": "4-6",
           "rpe": "8-9",
           "rest": "3-5m",
-          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Deadlift%20exercise%20form",
-          "notes": "Can pull sumo or conventional, go with whatever variation you are stronger with",
+          "link": "https://www.youtube.com/results?search_query=how%20to%20do%20Hack%20Squat%20exercise%20form",
+          "notes": "Allow your knees to come forward (past your toes), focus the tension on your quads",
           "substitutions": [
-            "Trap Bar Deadlift",
-            "Barbell Hip Thrust"
+            "Machine Squat",
+            "Bulgarian Split Squat"
           ]
         },
         {

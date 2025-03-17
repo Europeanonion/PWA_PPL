@@ -239,20 +239,20 @@ document.addEventListener('DOMContentLoaded', function() {
   addWeightUnitSelector();
   
   // Generate inputs for the initial view
-  setTimeout(generateExerciseInputs, 100); // Small delay to ensure DOM is fully loaded
+  setTimeout(generateExerciseInputs, 200); // Increased delay to ensure DOM is fully loaded
   
   // Add event listeners for phase and week changes to update inputs
   document.querySelectorAll('.phase-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      // Wait for the phase change to complete
-      setTimeout(generateExerciseInputs, 100);
+      // Wait for the phase change to complete with increased delay
+      setTimeout(generateExerciseInputs, 200);
     });
   });
   
   document.querySelectorAll('.week-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      // Wait for the week change to complete
-      setTimeout(generateExerciseInputs, 100);
+      // Wait for the week change to complete with increased delay
+      setTimeout(generateExerciseInputs, 200);
     });
   });
 });

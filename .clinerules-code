@@ -119,11 +119,52 @@ The memory bank should be maintained as a Markdown file named `dev-memory-bank.m
    - Track how chosen approaches align with project goals
    - Record any technical debt with remediation plans
 
+### Technologies and Dependencies Documentation
+
+The memory bank must maintain a comprehensive record of all technologies, libraries, and dependencies used in the project:
+
+1. **Master Dependencies List**
+   - A dedicated section at the TOP of the memory bank titled "## Technologies and Dependencies"
+   - This section should be updated (not duplicated) with each new dependency
+   - Format each entry with version number, purpose, and implementation date
+
+2. **Required Documentation Fields**
+   - Library/Dependency Name and Version
+   - Purpose and specific functionality it provides
+   - CDN URL or local file path
+   - Date added to project
+   - Any browser compatibility considerations
+   - Offline availability status (Is a local copy stored?)
+
+3. **Technology Decisions**
+   - Document why specific technologies were chosen over alternatives
+   - Note any limitations or concerns with chosen technologies
+   - Track technology-specific implementation details
+
+4. **Example Entry Format**:
+```
 ### Memory Bank Update Process
 1. Update the memory bank at the end of each development session
 2. Include timestamp with each major update
 3. Review the memory bank at the start of each new session
 4. Use the memory bank to track progress and maintain continuity
+
+### Memory Bank Structure Management
+
+1. **Chronological Entries**
+   - Each update should be added as a new dated entry at the TOP of the file
+   - Previous entries should be preserved in reverse chronological order
+   - The full history of development decisions should be maintained
+
+2. **Current Status Section**
+   - A separate "Current Project Status" section should exist at the TOP of the file
+   - This section should be completely replaced with each update
+   - This provides a single source of truth for current status
+
+3. **Avoiding Duplication**
+   - Do not duplicate entire sections from previous entries
+   - Reference previous entries when appropriate ("See 2023-03-15 entry for details")
+   - Only include new information in daily updates
 
 ## Memory Bank Commands
 
