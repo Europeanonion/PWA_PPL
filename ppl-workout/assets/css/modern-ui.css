@@ -1,15 +1,16 @@
-/* 
+/*
  * Modern UI Stylesheet for PPL Workout App
  * This file contains modern styling for the PPL Workout Tracker
  * following Material Design 3 principles and mobile-first approach
+ * Updated: 2025-03-17 with blue color scheme
  */
 
 /* ===== CSS Variables ===== */
 :root {
-  /* Brand Colors */
-  --brand-gold: #C38803;
-  --brand-gold-light: #F0D080;
-  --brand-gold-dark: #9A6B00;
+  /* Brand Colors - Blue Palette */
+  --brand-gold: #152e3e; /* Deep navy instead of gold */
+  --brand-gold-light: #4A78A9; /* Lighter blue accent */
+  --brand-gold-dark: #00838F; /* Teal accent */
   
   /* Neutral Colors */
   --neutral-50: #fafafa;
@@ -20,18 +21,23 @@
   --neutral-500: #737373;
   --neutral-600: #525252;
   --neutral-700: #404040;
-  --neutral-800: #262626;
+  --neutral-800: #212121; /* Darker for better contrast */
   --neutral-900: #171717;
   
   /* Semantic Colors */
   --success-color: #22c55e;
   --success-light: #dcfce7;
-  --warning-color: #f59e0b;
-  --warning-light: #fef3c7;
+  --warning-color: #2c5472; /* Mid-tone blue instead of orange */
+  --warning-light: #dbeafe; /* Blue-tinted light background */
   --danger-color: #ef4444;
   --danger-light: #fee2e2;
   --info-color: #3b82f6;
   --info-light: #dbeafe;
+  
+  /* Gradient Variables */
+  --primary-gradient: linear-gradient(135deg, #152e3e 0%, #00838F 100%);
+  --accent-gradient: linear-gradient(135deg, #4A78A9 0%, #00838F 100%);
+  --progress-gradient: linear-gradient(to right, #152e3e, #4A78A9);
   
   /* UI Colors */
   --background-color: var(--neutral-100);
@@ -123,7 +129,7 @@ a {
 }
 
 a:hover {
-  color: var(--brand-gold);
+  color: var(--brand-gold-dark);
 }
 
 /* ===== Layout ===== */
@@ -136,7 +142,7 @@ a:hover {
 
 /* ===== Header ===== */
 header {
-  background-color: var(--neutral-800);
+  background: var(--primary-gradient);
   color: white;
   padding: var(--spacing-lg) var(--spacing-md);
   position: sticky;
@@ -180,7 +186,7 @@ header {
 }
 
 .phase-btn.active {
-  background-color: var(--brand-gold);
+  background: var(--primary-gradient);
   box-shadow: var(--shadow-md);
 }
 
@@ -211,7 +217,7 @@ header {
 }
 
 .week-btn.active {
-  background-color: var(--brand-gold);
+  background: var(--primary-gradient);
   box-shadow: var(--shadow-md);
 }
 
@@ -226,7 +232,7 @@ header {
 }
 
 .phase-description {
-  background-color: var(--brand-gold);
+  background: var(--primary-gradient);
   color: white;
   padding: var(--spacing-md);
   margin-bottom: var(--spacing-lg);
@@ -262,7 +268,7 @@ header {
 }
 
 .day-header {
-  background-color: var(--brand-gold);
+  background: var(--primary-gradient);
   color: white;
   padding: var(--spacing-md);
   font-weight: 600;
@@ -270,6 +276,7 @@ header {
   position: sticky;
   top: 70px; /* Adjust based on header height */
   z-index: var(--z-index-sticky);
+  box-shadow: var(--shadow-md);
 }
 
 /* ===== Exercise Table ===== */
@@ -300,7 +307,7 @@ header {
 }
 
 .exercise-row:hover {
-  background-color: var(--brand-gold-light);
+  background-color: rgba(74, 120, 169, 0.2); /* Lighter blue accent with transparency */
 }
 
 .exercise-name {
@@ -352,7 +359,7 @@ header {
 }
 
 .info-icon:hover {
-  background-color: var(--brand-gold);
+  background-color: var(--brand-gold-dark);
   transform: scale(1.1);
 }
 
@@ -468,8 +475,8 @@ header {
 }
 
 .completed-checkbox:checked {
-  background-color: var(--success-color);
-  border-color: var(--success-color);
+  background-color: var(--brand-gold-dark);
+  border-color: var(--brand-gold-dark);
 }
 
 .completed-checkbox:checked::after {
@@ -509,7 +516,7 @@ header {
   position: absolute;
   top: -8px;
   right: -8px;
-  background-color: var(--brand-gold);
+  background: var(--accent-gradient);
   color: white;
   font-size: 10px;
   font-weight: bold;
@@ -541,7 +548,7 @@ header {
 }
 
 .data-management button:hover {
-  background-color: var(--brand-gold);
+  background: var(--primary-gradient);
   transform: translateY(-1px);
   box-shadow: var(--shadow-md);
 }
@@ -644,7 +651,7 @@ header {
 }
 
 .modal-title {
-  color: var(--brand-gold);
+  color: var(--brand-gold-dark);
   margin-top: 0;
 }
 
@@ -662,7 +669,7 @@ header {
 }
 
 .modal-table th {
-  background-color: var(--brand-gold);
+  background: var(--primary-gradient);
   color: white;
 }
 
@@ -685,7 +692,7 @@ footer p {
 }
 
 footer a {
-  color: var(--brand-gold);
+  color: var(--brand-gold-dark);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
@@ -737,7 +744,7 @@ footer a:hover {
 
 .progress-bar-fill {
   height: 100%;
-  background-color: var(--brand-gold);
+  background: var(--progress-gradient);
   border-radius: var(--radius-full);
   transition: width var(--transition-normal);
 }
