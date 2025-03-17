@@ -4,11 +4,10 @@
 # Navigate to project root
 cd /workspaces/exceljson
 
-# Create backup of current root structure
+# Create backup of current root structure (optional)
 echo "Creating backup of current root files..."
-timestamp=$(date +"%Y%m%d_%H%M%S")
-mkdir -p backups/root_backup_$timestamp
-find . -maxdepth 1 -not -path "./ppl-workout*" -not -path "./backups*" -not -path "./.*" -exec cp -r {} backups/root_backup_$timestamp/ \;
+mkdir -p backup
+find . -maxdepth 1 -not -path "./ppl-workout*" -not -path "./backup*" -not -path "./.*" -exec cp -r {} backup/ \;
 
 # Create dev/exercise-data directory if it doesn't exist
 echo "Creating dev/exercise-data directory..."
@@ -33,16 +32,3 @@ sed -i 's/register("\.\/service-worker\.js")/register("service-worker.js")/g' in
 
 echo "Files moved to root directory successfully"
 echo "You can now use Live Server to access the app at http://localhost:8080"
-
-# Ask if user wants to clean up duplicates
-echo ""
-echo "Do you want to clean up duplicate files in the ppl-workout directory? (y/n)"
-read -p "> " cleanup_choice
-
-if [ "$cleanup_choice" = "y" ] || [ "$cleanup_choice" = "Y" ]; then
-  echo "Running cleanup script..."
-  ./cleanup-duplicates.sh
-else
-  echo "Skipping cleanup. You can run ./cleanup-duplicates.sh later if needed."
-  echo "NOTE: Having duplicate files in both root and ppl-workout/ may cause confusion."
-fi

@@ -58,14 +58,34 @@ This option keeps all files in the ppl-workout directory.
 │   ├── css/                # Stylesheets
 │   ├── js/                 # JavaScript files
 │   └── icons/              # App icons
-└── dev/                    # Development files
-    └── exercise-data/      # JSON files containing workout data
+├── dev/                    # Development files
+│   └── exercise-data/      # JSON files containing workout data
+└── backups/                # Backup directory
+    ├── root_backup_*       # Backups of root directory
+    └── ppl-workout_backup_*# Backups of ppl-workout directory
 ```
 
 ## Scripts
 
 - `move-to-root.sh`: Moves all files from ppl-workout/ to the root directory
 - `cleanup-duplicates.sh`: Removes duplicate files after moving to root
+- `consolidate-backups.sh`: Consolidates multiple backup folders into a single location
+
+## Backup Management
+
+The deployment scripts automatically create backups before making changes:
+
+1. `move-to-root.sh` creates a timestamped backup of the root directory in `backups/root_backup_TIMESTAMP/`
+2. `cleanup-duplicates.sh` creates a timestamped backup of the ppl-workout directory in `backups/ppl-workout_backup_TIMESTAMP/`
+
+If you have multiple backup folders (backup/ and backups/), you can consolidate them using:
+
+```bash
+chmod +x consolidate-backups.sh
+./consolidate-backups.sh
+```
+
+This will move all contents from backup/ to backups/ and remove the duplicate backup/ directory.
 
 ## Troubleshooting
 
