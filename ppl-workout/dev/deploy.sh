@@ -1,14 +1,8 @@
 #!/bin/bash
-# deploy.sh - Script to deploy the PPL Workout PWA to GitHub Pages
-# 
-# This script automates the process of deploying the PWA to GitHub Pages
-# using the dedicated branch approach. It:
-# 1. Creates a gh-pages branch if it doesn't exist
-# 2. Updates the gh-pages branch with the latest changes
-# 3. Moves files from ppl-workout/ to the root in the gh-pages branch
-# 4. Commits and pushes the changes to GitHub
+# deploy.sh - Script to deploy the PPL Workout PWA to GitHub Pages using a clean branch approach
 #
-# Usage: ./deploy.sh
+# This script creates a clean gh-pages branch containing only the PWA files in the root
+# while ensuring no work is lost in the development branch
 
 # Text formatting
 BOLD="\033[1m"
@@ -24,41 +18,49 @@ echo "This script will deploy your PWA to GitHub Pages."
 CURRENT_BRANCH=$(git branch --show-current)
 echo -e "${YELLOW}Current branch: ${CURRENT_BRANCH}${RESET}"
 
+# Ensure we're on the development branch
+if [[ "$CURRENT_BRANCH" != "development" ]]; then
+  echo -e "${YELLOW}You are not on the development branch. Recommended to deploy from development branch.${RESET}"
+  read -p "Continue anyway? (y/n): " CONTINUE
+  if [[ $CONTINUE != "y" && $CONTINUE != "Y" ]]; then
+    echo -e "${YELLOW}Deployment cancelled. Switch to development branch first.${RESET}"
+    exit 0
+  fi
+fi
+
 # Check if there are uncommitted changes
 if [[ -n $(git status -s) ]]; then
   echo -e "${RED}You have uncommitted changes. Please commit or stash them before deploying.${RESET}"
   exit 1
 fi
 
-# Check if gh-pages branch exists
-if ! git show-ref --verify --quiet refs/heads/gh-pages; then
-  echo -e "${YELLOW}Creating gh-pages branch...${RESET}"
-  git checkout -b gh-pages
-  echo -e "${GREEN}Created gh-pages branch.${RESET}"
-else
-  # Update development branch
-  echo -e "${YELLOW}Updating ${CURRENT_BRANCH} branch...${RESET}"
-  git checkout ${CURRENT_BRANCH}
-  git pull origin ${CURRENT_BRANCH}
-  
-  # Switch to gh-pages branch
-  echo -e "${YELLOW}Switching to gh-pages branch...${RESET}"
-  git checkout gh-pages
-  git pull origin gh-pages
-  
-  # Merge changes from development branch
-  echo -e "${YELLOW}Merging changes from ${CURRENT_BRANCH}...${RESET}"
-  git merge ${CURRENT_BRANCH} -m "Merge ${CURRENT_BRANCH} into gh-pages for deployment"
-fi
+# Backup the dev directory to ensure no work is lost
+echo -e "${YELLOW}Creating backup of dev directory...${RESET}"
+TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+BACKUP_DIR="/tmp/ppl_dev_backup_${TIMESTAMP}"
+mkdir -p "$BACKUP_DIR"
+cp -r /workspaces/exceljson/ppl-workout/dev/* "$BACKUP_DIR"
+echo -e "${GREEN}Backup created at: ${BACKUP_DIR}${RESET}"
 
-# Clean up root directory (preserve .git and other important files)
-echo -e "${YELLOW}Cleaning up root directory...${RESET}"
-find . -maxdepth 1 -not -path "./.git*" -not -path "." -not -path "./ppl-workout" -exec rm -rf {} \;
+# Create a clean orphan branch
+echo -e "${YELLOW}Creating clean gh-pages branch...${RESET}"
+git checkout --orphan temp_gh_pages
 
-# Copy files from ppl-workout/ to root
-echo -e "${YELLOW}Copying files from ppl-workout/ to root...${RESET}"
-cp -r ppl-workout/* .
-cp ppl-workout/.nojekyll .
+# Remove everything from staging
+echo -e "${YELLOW}Clearing staging area...${RESET}"
+git rm -rf --cached .
+
+# Clear the working directory except .git
+find . -not -path "./.git*" -not -path "." -delete
+
+# Copy PWA files directly to the root
+echo -e "${YELLOW}Copying PWA files to root directory...${RESET}"
+# Copy all files from the PWA directory to root
+cp -r /workspaces/exceljson/ppl-workout/* .
+
+# Create .nojekyll file to prevent Jekyll processing
+echo -e "${YELLOW}Creating .nojekyll file...${RESET}"
+touch .nojekyll
 
 # Check for repository-specific path adjustments
 echo -e "${YELLOW}Checking for path adjustments needed for GitHub Pages...${RESET}"
@@ -77,21 +79,48 @@ if [[ $ADJUST_PATHS == "y" || $ADJUST_PATHS == "Y" ]]; then
   echo -e "${RED}IMPORTANT: Manual verification of path adjustments is recommended.${RESET}"
 fi
 
-# Commit and push changes
+# Commit the new files
 echo -e "${YELLOW}Committing changes...${RESET}"
 git add .
-git commit -m "Update deployment $(date)"
+git commit -m "Deploy PWA to GitHub Pages $(date)"
 
+# Save the current gh-pages branch if it exists
+if git show-ref --verify --quiet refs/heads/gh-pages; then
+  echo -e "${YELLOW}Backing up current gh-pages branch...${RESET}"
+  git branch -m gh-pages gh-pages-backup-${TIMESTAMP}
+  echo -e "${GREEN}Current gh-pages branch backed up as gh-pages-backup-${TIMESTAMP}${RESET}"
+fi
+
+# Rename our temp branch to gh-pages
+git branch -m gh-pages
+
+# Force push to replace the gh-pages branch on remote
 echo -e "${YELLOW}Pushing to GitHub...${RESET}"
-git push origin gh-pages
+git push -f origin gh-pages
 
 # Return to original branch
 echo -e "${YELLOW}Returning to ${CURRENT_BRANCH} branch...${RESET}"
 git checkout ${CURRENT_BRANCH}
 
-# Push development branch changes to remote repository
-echo -e "${YELLOW}Pushing ${CURRENT_BRANCH} branch changes to remote repository...${RESET}"
-git push origin ${CURRENT_BRANCH}
+# Verify that we're back on the original branch
+if [[ "$(git branch --show-current)" != "$CURRENT_BRANCH" ]]; then
+  echo -e "${RED}Failed to return to ${CURRENT_BRANCH} branch. Please run 'git checkout ${CURRENT_BRANCH}' manually.${RESET}"
+else
+  echo -e "${GREEN}Successfully returned to ${CURRENT_BRANCH} branch.${RESET}"
+fi
+
+# Restore dev directory from backup if needed
+if [[ -d "$BACKUP_DIR" ]]; then
+  echo -e "${YELLOW}Checking if dev directory needs to be restored...${RESET}"
+  if [[ ! -d "/workspaces/exceljson/ppl-workout/dev" || -z "$(ls -A /workspaces/exceljson/ppl-workout/dev)" ]]; then
+    echo -e "${YELLOW}Restoring dev directory from backup...${RESET}"
+    mkdir -p /workspaces/exceljson/ppl-workout/dev
+    cp -r "$BACKUP_DIR"/* /workspaces/exceljson/ppl-workout/dev/
+    echo -e "${GREEN}Dev directory restored from backup.${RESET}"
+  else
+    echo -e "${GREEN}Dev directory appears intact, no restoration needed.${RESET}"
+  fi
+fi
 
 echo -e "${BOLD}${GREEN}Deployment complete!${RESET}"
 echo -e "Your PWA should be available at: ${BOLD}https://YOUR-USERNAME.github.io/${REPO_NAME}/${RESET}"
@@ -102,3 +131,9 @@ echo -e "2. Click on Settings > Pages"
 echo -e "3. Under 'Build and deployment' > 'Source', select 'Deploy from a branch'"
 echo -e "4. Select 'gh-pages' branch and '/ (root)' folder"
 echo -e "5. Click Save"
+echo -e ""
+echo -e "${YELLOW}Backup Information:${RESET}"
+echo -e "- Dev directory backup: ${BACKUP_DIR}"
+if git show-ref --verify --quiet refs/heads/gh-pages-backup-${TIMESTAMP}; then
+  echo -e "- Previous gh-pages branch backed up as: gh-pages-backup-${TIMESTAMP}"
+fi
